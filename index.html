@@ -67,7 +67,7 @@
 <body class="font-sans antialiased text-gray-900">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md text-white border-b border-gray-800 transition-transform duration-300" id="navbar">
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md text-white border-b border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20 relative">
                 
@@ -202,18 +202,19 @@
     <!-- PART 03: BUSINESS Section -->
     <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-24 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
+            <!-- Changed gap-10 to gap-5 (20px) to reduce space between text and image -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-12">
                 <!-- Text & Tabs & Title Group -->
+                <!-- Removed md:ml-[120px] to align left properly -->
                 <div class="w-full md:w-1/2 flex flex-col items-center text-center md:items-start md:text-left">
                     
                     <!-- Title -->
-                    <h2 class="text-4xl md:text-[44px] font-bold mb-5 text-center md:text-left">BUSINESS</h2>
+                    <!-- Increased mb-5 to mb-[30px] (30px) -->
+                    <h2 class="text-4xl md:text-[44px] font-bold mb-[30px] text-center md:text-left">BUSINESS</h2>
 
                     <!-- Tab Headers -->
-                    <!-- Spacing pb-[10px] for stroke gap -->
                     <div id="tab-container" class="relative flex gap-8 mb-5 overflow-x-auto w-full justify-center md:justify-start pb-[10px]">
                         <button onclick="switchTab('redart')" id="btn-redart" class="group outline-none relative">
-                            <!-- Changed text size to text-[20px] -->
                             <span id="text-redart" class="text-[20px] font-bold text-black transition-colors whitespace-nowrap">redart</span>
                         </button>
                         <button onclick="switchTab('pick')" id="btn-pick" class="group outline-none relative">
@@ -226,26 +227,21 @@
                     </div>
 
                     <!-- Tab Contents Wrapper with Fixed Height -->
-                    <div class="min-h-[240px] w-full flex flex-col items-center md:items-start">
+                    <div class="h-auto md:h-[280px] w-full flex flex-col items-center md:items-start">
                         <!-- Tab Contents -->
                         <div id="content-redart" class="text-content block animate-fade-in w-full">
-                            <!-- App Title spacing: mb-2 (8px), Text Size: text-[20px] -->
-                            <h3 class="text-[20px] font-bold mb-2">레드아트</h3>
-                            <!-- Bold Desc spacing: mb-1 (4px) -->
+                            <!-- Increased size to text-[30px] -->
+                            <h3 class="text-[30px] font-bold mb-2">레드아트</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">레드아트를 통해 전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 소통할 수 있습니다.</p>
                         </div>
                         <div id="content-pick" class="text-content hidden animate-fade-in w-full">
-                            <!-- App Title spacing: mb-2 (8px), Text Size: text-[20px] -->
-                            <h3 class="text-[20px] font-bold mb-2">픽 (Pick)</h3>
-                            <!-- Bold Desc spacing: mb-1 (4px) -->
+                            <h3 class="text-[30px] font-bold mb-2">픽 (Pick)</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">다양한 유형의 디지털 자산 월렛을 연결합니다. 개인형부터 중앙형까지 간단하게 액세스하고, 디지털 자산 포트폴리오를 한 눈에 파악하세요.</p>
                         </div>
                         <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
-                            <!-- App Title spacing: mb-2 (8px), Text Size: text-[20px] -->
-                            <h3 class="text-[20px] font-bold mb-2">TC Wallet</h3>
-                            <!-- Bold Desc spacing: mb-1 (4px) -->
+                            <h3 class="text-[30px] font-bold mb-2">TC Wallet</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
@@ -258,12 +254,11 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
                     
                     <!-- Phone Mockup Container -->
-                    <!-- Changed rounded-[3.5rem] to rounded-[2rem] to reduce corner radius on mobile -->
-                    <div class="relative w-[240px] h-[480px] md:w-[318px] md:h-[640px] z-10 border-0 rounded-[2rem] shadow-xl bg-white">
+                    <!-- Reduced size by 2px total (1px each side) to fix overlapping -->
+                    <div class="relative w-[238px] h-[478px] md:w-[316px] md:h-[638px] z-10 border-0 rounded-[2rem] shadow-xl bg-white">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
                         <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
-                            <!-- Changed rounded-[2.5rem] to rounded-[1.5rem] for inner screen -->
-                            <div class="w-full h-full rounded-[1.5rem] overflow-hidden bg-gray-200 relative">
+                            <div class="w-full h-full rounded-[2rem] overflow-hidden bg-gray-200 relative">
                                 <img id="screen-redart" src="img/phone_01.png" alt="redart 이미지" class="screen-img block w-full h-full object-cover animate-fade-in absolute inset-0">
                                 <img id="screen-pick" src="img/phone_02.png" alt="Pick 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
                                 <img id="screen-tcwallet" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
@@ -410,6 +405,25 @@
 
     <script>
         let currentTabId = 'redart';
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+
+        // Scroll Logic: Hide navbar on down, show on up
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 80) {
+                if (scrollTop > lastScrollTop) {
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                }
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
 
         // Tab Logic
         function switchTab(tabId) {
@@ -501,7 +515,6 @@
 
             let current = '';
 
-            // Using standard scroll spy logic, adjusted for full page sections
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 if (pageYOffset >= (sectionTop - window.innerHeight / 3)) {
