@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRACKCHAIN - 혁신적인 금융과 기술의 접목</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF5A00', // 시안의 오렌지색
+                        dark: '#111111',
+                        light: '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS Scroll Snap Configuration */
+        html {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+        
+        /* Disable scroll snap on very short screens to avoid trapping */
+        @media (max-height: 600px) {
+            html {
+                scroll-snap-type: none;
+            }
+        }
+
+        /* Hide Scrollbar but keep functionality */
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Nav Link Active State Styles */
+        .nav-link.active .nav-dot {
+            opacity: 1;
+        }
+        .nav-link.active span {
+            color: #FF6D2B;
+            font-weight: 700;
+        }
+        
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md text-white border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 relative">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center justify-start">
+                    <a href="#main" class="block">
+                        <img src="logo_track.png" alt="TRACKCHAIN" class="w-[216px] h-[36px] object-contain">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <!-- Menu Items -->
+                        <a href="#main" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="main">
+                            <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF5A00] opacity-0 transition-opacity duration-300"></div>
+                            <span class="text-[16px] font-medium text-gray-300 group-hover:text-white transition-colors">MAIN</span>
+                        </a>
+                        <a href="#value" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="value">
+                            <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF5A00] opacity-0 transition-opacity duration-300"></div>
+                            <span class="text-[16px] font-medium text-gray-300 group-hover:text-white transition-colors">VALUE & VISION</span>
+                        </a>
+                        <a href="#business" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="business">
+                            <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF5A00] opacity-0 transition-opacity duration-300"></div>
+                            <span class="text-[16px] font-medium text-gray-300 group-hover:text-white transition-colors">BUSINESS</span>
+                        </a>
+                        <a href="#press" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="press">
+                            <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF5A00] opacity-0 transition-opacity duration-300"></div>
+                            <span class="text-[16px] font-medium text-gray-300 group-hover:text-white transition-colors">PRESS</span>
+                        </a>
+                        <a href="#partners-contact-section" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="partners-contact-section">
+                            <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF5A00] opacity-0 transition-opacity duration-300"></div>
+                            <span class="text-[16px] font-medium text-gray-300 group-hover:text-white transition-colors">PARTNERS</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <div class="flex lg:hidden z-20 absolute right-0 top-1/2 transform -translate-y-1/2 mr-2">
+                    <button onclick="toggleMenu()" class="text-white hover:text-primary focus:outline-none p-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Fullscreen Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black z-[60] transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+        <div class="flex justify-end p-6 absolute top-0 right-0 w-full">
+            <button onclick="toggleMenu()" class="text-white hover:text-primary transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col px-10 space-y-8 h-full justify-center text-center">
+            <a href="#main" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">MAIN</a>
+            <a href="#value" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">VALUE & VISION</a> 
+            <a href="#business" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">BUSINESS</a> 
+            <a href="#press" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">PRESS</a>
+            <a href="#partners-contact-section" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">PARTNERS</a>
+        </div>
+    </div>
+
+    <!-- PART 01: MAIN HERO Section -->
+    <section id="main" class="snap-start relative min-h-screen h-screen bg-dark overflow-hidden flex items-center justify-center text-white w-full">
+        <!-- Backgrounds -->
+        <img src="img/bg_mobile.png" alt="Mobile Background" class="absolute inset-0 w-full h-full object-cover md:hidden z-0">
+        <img src="img/bg_web.png" alt="Web Background" class="absolute inset-0 w-full h-full object-cover hidden md:block z-0">
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+            <div class="animate-[fadeInUp_1s_ease-out_forwards] flex flex-col items-center md:items-start text-center md:text-left w-full">
+                <h1 class="text-[50px] leading-[60px] md:text-[64px] md:leading-[80px] font-bold mb-6 break-keep">
+                    혁신적인 금융과<br>
+                    기술의 접목
+                </h1>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 w-full text-center animate-bounce z-20">
+            <p class="text-xs tracking-widest mb-2 uppercase text-gray-400">Scroll Down</p>
+            <i class="fas fa-arrow-down text-white"></i>
+        </div>
+    </section>
+
+    <!-- PART 02: VALUE & VISION Section -->
+    <section id="value" class="snap-start relative min-h-screen bg-white flex items-center w-full py-24 md:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full md:pt-5">
+            <div class="flex flex-col md:flex-row md:items-start">
+                <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left">
+                    <h2 class="text-4xl md:text-[44px] font-bold text-gray-900 md:mt-5">VALUE & VISION</h2>
+                </div>
+                <div class="md:w-2/3 space-y-12 md:space-y-16">
+                    <!-- Item 1 -->
+                    <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-6 group hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex-shrink-0">
+                            <img src="img/img_value01.gif" alt="WEB3 여정의 파트너" class="w-[96px] h-[96px] object-contain">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">WEB3 여정의 파트너</h3>
+                            <!-- Added break-keep -->
+                            <p class="text-gray-600 leading-relaxed max-w-[300px] mx-auto md:max-w-[540px] md:mx-0 break-keep">우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만듭니다.</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-6 group hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex-shrink-0">
+                            <img src="img/img_value02.gif" alt="시대 흐름에 맞춘 WEB3 기술 활용" class="w-[96px] h-[96px] object-contain">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">시대 흐름에 맞춘 WEB3 기술 활용</h3>
+                            <!-- Added break-keep -->
+                            <p class="text-gray-600 leading-relaxed max-w-[300px] mx-auto md:max-w-[540px] md:mx-0 break-keep">아트 특화 플랫폼 "redart"는 블록체인, NFT 등 Web3 기술 접목으로 아트 시장의 디지털 전환을 돕습니다.</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-6 group hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex-shrink-0">
+                            <img src="img/img_value03.gif" alt="WEB3 금융·보안 솔루션 제공" class="w-[96px] h-[96px] object-contain">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">WEB3 금융·보안 솔루션 제공</h3>
+                            <!-- Added break-keep -->
+                            <p class="text-gray-600 leading-relaxed max-w-[300px] mx-auto md:max-w-[540px] md:mx-0 break-keep">금융 및 보안 솔루션 개발 역량을 토대로 전통 금융과 디지털 자산 월렛(중앙형, 개인형)부터 WEB3 금융 서비스(DeFi)까지 디지털 금융의 대중화에 기여합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PART 03: BUSINESS Section -->
+    <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-24 md:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
+                <!-- Text & Tabs & Title Group -->
+                <div class="w-full md:w-1/2 flex flex-col items-center text-center md:items-start md:text-left">
+                    
+                    <!-- Title -->
+                    <h2 class="text-4xl md:text-[44px] font-bold mb-12 text-center md:text-left">BUSINESS</h2>
+
+                    <!-- Tab Headers -->
+                    <div id="tab-container" class="relative flex gap-8 mb-[52px] overflow-x-auto w-full justify-center md:justify-start pb-4">
+                        <button onclick="switchTab('redart')" id="btn-redart" class="group outline-none relative">
+                            <span id="text-redart" class="text-2xl font-bold text-black transition-colors whitespace-nowrap">redart</span>
+                        </button>
+                        <button onclick="switchTab('pick')" id="btn-pick" class="group outline-none relative">
+                            <span id="text-pick" class="text-2xl font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">Pick</span>
+                        </button>
+                        <button onclick="switchTab('tcwallet')" id="btn-tcwallet" class="group outline-none relative">
+                            <span id="text-tcwallet" class="text-2xl font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">TC Wallet</span>
+                        </button>
+                        <div id="tab-indicator" class="absolute bottom-0 h-1 bg-[#FF6D2B] transition-all duration-300 ease-out"></div>
+                    </div>
+
+                    <!-- Tab Contents Wrapper -->
+                    <div class="h-auto md:h-[280px] w-full flex flex-col items-center md:items-start">
+                        <!-- Tab Contents -->
+                        <div id="content-redart" class="text-content block animate-fade-in w-full">
+                            <h3 class="text-3xl font-bold mb-4">레드아트</h3>
+                            <p class="text-[16px] font-bold mb-2 text-gray-800">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
+                            <!-- Increased max-w to 360px and added break-keep -->
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">레드아트를 통해 전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 소통할 수 있습니다.</p>
+                        </div>
+                        <div id="content-pick" class="text-content hidden animate-fade-in w-full">
+                            <h3 class="text-3xl font-bold mb-4">픽 (Pick)</h3>
+                            <p class="text-[16px] font-bold mb-2 text-gray-800">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
+                            <!-- Increased max-w to 360px and added break-keep -->
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">다양한 유형의 디지털 자산 월렛을 연결합니다. 개인형부터 중앙형까지 간단하게 액세스하고, 디지털 자산 포트폴리오를 한 눈에 파악하세요.</p>
+                        </div>
+                        <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
+                            <h3 class="text-3xl font-bold mb-4">TC Wallet</h3>
+                            <p class="text-[16px] font-bold mb-2 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
+                            <!-- Increased max-w to 360px and added break-keep -->
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Mockup Image Area -->
+                <div class="w-full md:w-1/2 flex justify-center items-center relative md:-ml-20">
+                    <!-- Background Circle -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
+                    
+                    <!-- Phone Mockup Container -->
+                    <div class="relative w-[318px] h-[640px] z-10 border-0 rounded-[3.5rem] shadow-xl bg-white">
+                        <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
+                        <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
+                            <div class="w-full h-full rounded-[2.5rem] overflow-hidden bg-gray-200 relative">
+                                <img id="screen-redart" src="img/phone_01.png" alt="redart 이미지" class="screen-img block w-full h-full object-cover animate-fade-in absolute inset-0">
+                                <img id="screen-pick" src="img/phone_02.png" alt="Pick 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
+                                <img id="screen-tcwallet" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PART 04: PRESS Section -->
+    <section id="press" class="snap-start relative min-h-screen bg-white flex items-center w-full py-24 md:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full md:pt-5">
+            <!-- Added text-center md:text-left for Mobile Center Alignment of Title -->
+            <h2 class="text-4xl md:text-[44px] font-bold mb-12 text-center md:text-left">PRESS</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-gray-200 p-8 hover:shadow-lg transition-shadow cursor-pointer">
+                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
+                    <h3 class="text-xl font-bold mb-4 line-clamp-2">"웹3.0 기반 디지털 아트뱅킹 강화 위해 협력" 하나은행-트랙체인 MOU</h3>
+                    <p class="text-gray-400 text-sm">2023. 12. 04</p>
+                </div>
+                <div class="border border-gray-200 p-8 hover:shadow-lg transition-shadow cursor-pointer">
+                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
+                    <h3 class="text-xl font-bold mb-4 line-clamp-2">트랙체인, NH농협과 NFT 발행</h3>
+                    <p class="text-gray-400 text-sm">2023. 08. 04</p>
+                </div>
+                <div class="border border-gray-200 p-8 hover:shadow-lg transition-shadow cursor-pointer">
+                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
+                    <h3 class="text-xl font-bold mb-4 line-clamp-2">하나은행, 트랙체인과 웹3.0 기반 디지털 협약</h3>
+                    <p class="text-gray-400 text-sm">2023. 07. 04</p>
+                </div>
+                 <div class="border border-gray-200 p-8 hover:shadow-lg transition-shadow cursor-pointer">
+                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
+                    <h3 class="text-xl font-bold mb-4 line-clamp-2">트랙체인, 미술품 조각투자 플랫폼 기술 지원</h3>
+                    <p class="text-gray-400 text-sm">2023. 06. 04</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-12 space-x-4">
+                <button class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-primary hover:text-primary transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-primary hover:text-primary transition-colors">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PART 05: COMBINED PARTNERS + CONTACT US -->
+    <section id="partners-contact-section" class="snap-start relative min-h-screen w-full flex flex-col">
+        
+        <!-- PARTNERS (Top Half) -->
+        <div id="partners" class="flex-1 bg-[#333333] text-white flex items-center py-16 md:py-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left w-full">
+                <h2 class="text-4xl md:text-[44px] font-bold mb-[44px]">PARTNERS</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-x-16 md:gap-y-[4px] opacity-80">
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+                        <!-- Changed mobile height from h-[48px] to h-[72px] -->
+                        <img src="img/partners01.png" alt="Partner 1" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+                        <img src="img/partners02.png" alt="Partner 2" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+                        <img src="img/partners03.png" alt="Partner 3" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+                        <img src="img/partners04.png" alt="Partner 4" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+                        <img src="img/partners05.png" alt="Partner 5" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+                        <img src="img/partners06.png" alt="Partner 6" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all col-span-2 md:col-span-1">
+                        <img src="img/partners07.png" alt="Partner 7" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT US (Bottom Half) -->
+        <div id="contact" class="flex-1 bg-primary text-white flex items-center relative py-16 md:py-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="flex flex-col md:flex-row items-center md:items-start justify-between">
+                    <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                        <h2 class="text-4xl md:text-[44px] font-bold mb-4">CONTACT US</h2>
+                        <p class="text-white/90 text-lg">트랙체인과 함께하고 싶거나<br>궁금한 점이 있으시다면 메일을 보내주세요.</p>
+                    </div>
+                    
+                    <div class="w-full md:w-1/2 bg-transparent">
+                        <form class="space-y-4">
+                            <div class="relative">
+                                <select class="w-full p-4 pr-10 bg-white text-gray-900 rounded-lg appearance-none focus:outline-none cursor-pointer">
+                                    <option>문의유형</option>
+                                    <option>제휴 문의</option>
+                                    <option>채용 문의</option>
+                                    <option>기타</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-600">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            
+                            <input type="email" placeholder="example@trackchaincorp.com" class="w-full p-4 bg-white text-gray-900 rounded-lg focus:outline-none placeholder-gray-400">
+                            
+                            <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full p-4 bg-black text-white font-bold rounded-lg hover:bg-gray-900 transition-colors">
+                                보내기
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="snap-start w-full bg-black text-gray-400 py-[72px] border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end">
+                <div class="mb-8 md:mb-0">
+                    <div class="mb-4 flex justify-start">
+                        <img src="img/img_logo_footer.png" alt="TRACKCHAIN" class="h-[48px] w-auto object-contain object-left">
+                    </div>
+                    <div class="space-x-4 mb-4">
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-google-play fa-lg"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-app-store-ios fa-lg"></i></a>
+                    </div>
+                    <div class="text-xs space-y-1">
+                        <p>서울시 영등포구 여의대로 108 파크원 타워1 26층</p>
+                        <p>대표: 홍길동 | 사업자등록번호: 000-00-00000</p>
+                    </div>
+                </div>
+                <div class="text-xs">
+                    &copy; 2024 트랙체인 All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentTabId = 'redart';
+
+        // Tab Logic
+        function switchTab(tabId) {
+            currentTabId = tabId;
+            const tabs = ['redart', 'pick', 'tcwallet'];
+            const indicator = document.getElementById('tab-indicator');
+            const tabContainer = document.getElementById('tab-container');
+            
+            tabs.forEach(t => {
+                const textSpan = document.getElementById(`text-${t}`);
+                const content = document.getElementById(`content-${t}`);
+                
+                if (t === tabId) {
+                    textSpan.classList.remove('text-gray-400');
+                    textSpan.classList.add('text-black');
+                    content.classList.remove('hidden');
+                    content.classList.add('block');
+                    
+                    if(indicator && textSpan && tabContainer) {
+                        const textRect = textSpan.getBoundingClientRect();
+                        const containerRect = tabContainer.getBoundingClientRect();
+                        const relativeLeft = textRect.left - containerRect.left + tabContainer.scrollLeft;
+                        indicator.style.width = `${textRect.width}px`;
+                        indicator.style.left = `${relativeLeft}px`;
+                    }
+                } else {
+                    textSpan.classList.add('text-gray-400');
+                    textSpan.classList.remove('text-black');
+                    content.classList.add('hidden');
+                    content.classList.remove('block');
+                }
+            });
+
+            const images = document.querySelectorAll('.screen-img');
+            images.forEach(img => {
+                if (img.id === `screen-${tabId}`) {
+                    img.classList.remove('hidden');
+                    img.classList.add('block');
+                } else {
+                    img.classList.add('hidden');
+                    img.classList.remove('block');
+                }
+            });
+        }
+
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                switchTab('redart');
+            }, 100);
+        });
+
+        window.addEventListener('resize', () => {
+            switchTab(currentTabId);
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                menu.classList.add('translate-x-full');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        function handleMobileClick(el) {
+            const items = document.querySelectorAll('.mobile-menu-item');
+            items.forEach(item => {
+                item.classList.remove('text-[#FF6D2B]', 'font-bold');
+                item.classList.add('text-white', 'font-medium');
+            });
+            el.classList.remove('text-white', 'font-medium');
+            el.classList.add('text-[#FF6D2B]', 'font-bold');
+            toggleMenu();
+        }
+        
+        // Scroll Spy & Navbar Logic
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+
+            // Using standard scroll spy logic, adjusted for full page sections
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - window.innerHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                current = 'partners-contact-section';
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
