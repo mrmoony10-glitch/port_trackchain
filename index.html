@@ -205,17 +205,15 @@
     <!-- PART 03: BUSINESS Section -->
     <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-24 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <!-- Changed gap-10 to gap-5 (20px) on mobile -->
-            <div class="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
                 <!-- Text & Tabs & Title Group -->
-                <div class="w-full md:w-1/2 md:ml-[120px] flex flex-col items-center text-center md:items-start md:text-left">
+                <div class="w-full md:w-1/2 flex flex-col items-center text-center md:items-start md:text-left">
                     
                     <!-- Title -->
-                    <!-- Changed mb-12 to mb-5 (20px) on mobile, kept mb-12 (48px) on desktop -->
-                    <h2 class="text-4xl md:text-[44px] font-bold mb-5 md:mb-12 text-center md:text-left">BUSINESS</h2>
+                    <!-- Reduced mb-12 to mb-5 (20px) as requested -->
+                    <h2 class="text-4xl md:text-[44px] font-bold mb-5 text-center md:text-left">BUSINESS</h2>
 
                     <!-- Tab Headers -->
-                    <!-- Changed pb-4 to pb-[10px] to reduce space to 10px -->
                     <div id="tab-container" class="relative flex gap-8 mb-5 overflow-x-auto w-full justify-center md:justify-start pb-[10px]">
                         <button onclick="switchTab('redart')" id="btn-redart" class="group outline-none relative">
                             <span id="text-redart" class="text-2xl font-bold text-black transition-colors whitespace-nowrap">redart</span>
@@ -230,22 +228,28 @@
                     </div>
 
                     <!-- Tab Contents Wrapper with Fixed Height -->
-                    <div class="h-auto md:h-[280px] w-full flex flex-col items-center md:items-start">
+                    <!-- Used min-h-[240px] to fix height and prevent jumping layout when switching tabs -->
+                    <div class="min-h-[240px] w-full flex flex-col items-center md:items-start">
                         <!-- Tab Contents -->
                         <div id="content-redart" class="text-content block animate-fade-in w-full">
-                            <!-- Changed mb-4 to mb-2 (8px) -->
+                            <!-- App Title spacing: mb-2 (8px) -->
                             <h3 class="text-3xl font-bold mb-2">레드아트</h3>
-                            <p class="text-[16px] font-bold mb-2 text-gray-800">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
+                            <!-- Bold Desc spacing: mb-1 (4px) -->
+                            <p class="text-[16px] font-bold mb-1 text-gray-800">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">레드아트를 통해 전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 소통할 수 있습니다.</p>
                         </div>
                         <div id="content-pick" class="text-content hidden animate-fade-in w-full">
+                            <!-- App Title spacing: mb-2 (8px) -->
                             <h3 class="text-3xl font-bold mb-2">픽 (Pick)</h3>
-                            <p class="text-[16px] font-bold mb-2 text-gray-800">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
+                            <!-- Bold Desc spacing: mb-1 (4px) -->
+                            <p class="text-[16px] font-bold mb-1 text-gray-800">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">다양한 유형의 디지털 자산 월렛을 연결합니다. 개인형부터 중앙형까지 간단하게 액세스하고, 디지털 자산 포트폴리오를 한 눈에 파악하세요.</p>
                         </div>
                         <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
+                            <!-- App Title spacing: mb-2 (8px) -->
                             <h3 class="text-3xl font-bold mb-2">TC Wallet</h3>
-                            <p class="text-[16px] font-bold mb-2 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
+                            <!-- Bold Desc spacing: mb-1 (4px) -->
+                            <p class="text-[16px] font-bold mb-1 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
                     </div>
