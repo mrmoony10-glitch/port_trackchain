@@ -166,7 +166,6 @@
                 <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left">
                     <h2 class="text-4xl md:text-[44px] font-bold text-gray-900 md:mt-5">VALUE & VISION</h2>
                 </div>
-                <!-- Added md:pl-5 to shift content 20px to the right on desktop -->
                 <div class="md:w-2/3 space-y-12 md:space-y-16 md:pl-5">
                     <!-- Item 1 -->
                     <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-2 md:gap-6 group hover:-translate-y-2 transition-transform duration-300">
@@ -210,16 +209,12 @@
             <div class="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-12">
                 
                 <!-- Text & Tabs & Title Group -->
-                <!-- Mobile: 'contents' ungroups children to allow reordering with the phone image -->
-                <!-- Desktop: 'md:flex' groups them back into the left column -->
                 <div class="contents md:flex md:w-1/2 md:flex-col md:items-start md:text-left">
                     
-                    <!-- Title: Order 1 on mobile -->
-                    <!-- Removed mb-5 on mobile (handled by parent gap-5), kept md:mb-12 (48px) on desktop -->
+                    <!-- Title -->
                     <h2 class="order-1 md:order-none text-4xl md:text-[44px] font-bold mb-0 md:mb-12 text-center md:text-left">BUSINESS</h2>
 
-                    <!-- Tab Headers: Order 2 on mobile -->
-                    <!-- Removed mb-5 on mobile, kept md:mb-5 on desktop -->
+                    <!-- Tab Headers -->
                     <div id="tab-container" class="order-2 md:order-none relative flex gap-8 mb-0 md:mb-5 overflow-x-auto w-full justify-center md:justify-start pb-[10px]">
                         <button onclick="switchTab('redart')" id="btn-redart" class="group outline-none relative">
                             <span id="text-redart" class="text-[20px] font-bold text-black transition-colors whitespace-nowrap">redart</span>
@@ -233,30 +228,30 @@
                         <div id="tab-indicator" class="absolute bottom-0 h-1 bg-[#FF6D2B] transition-all duration-300 ease-out"></div>
                     </div>
 
-                    <!-- Tab Contents Wrapper: Order 4 on mobile (Bottom) -->
-                    <!-- Mobile: h-auto, Desktop: h-[280px] -->
-                    <div class="order-4 md:order-none h-auto md:h-[280px] w-full flex flex-col items-center md:items-start text-center md:text-left">
+                    <!-- Tab Contents Wrapper -->
+                    <!-- Added mt-[10px] md:mt-0 to increase spacing from phone image on mobile -->
+                    <div class="order-4 md:order-none h-auto md:h-[280px] w-full flex flex-col items-center md:items-start text-center md:text-left mt-[10px] md:mt-0">
                         <!-- Tab Contents -->
                         <div id="content-redart" class="text-content block animate-fade-in w-full">
-                            <h3 class="text-[30px] font-bold mb-2">레드아트</h3>
+                            <!-- Changed mb-2 to mb-1 (4px) -->
+                            <h3 class="text-[30px] font-bold mb-1">레드아트</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">레드아트를 통해 전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 소통할 수 있습니다.</p>
                         </div>
                         <div id="content-pick" class="text-content hidden animate-fade-in w-full">
-                            <h3 class="text-[30px] font-bold mb-2">픽 (Pick)</h3>
+                            <h3 class="text-[30px] font-bold mb-1">픽 (Pick)</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">다양한 유형의 디지털 자산 월렛을 연결합니다. 개인형부터 중앙형까지 간단하게 액세스하고, 디지털 자산 포트폴리오를 한 눈에 파악하세요.</p>
                         </div>
                         <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
-                            <h3 class="text-[30px] font-bold mb-2">TC Wallet</h3>
+                            <h3 class="text-[30px] font-bold mb-1">TC Wallet</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phone Mockup Image Area: Order 3 on mobile (Middle) -->
-                <!-- Added order-3 and md:order-none -->
+                <!-- Phone Mockup Image Area -->
                 <div id="business-swipe-area" class="order-3 md:order-none w-full md:w-1/2 flex justify-center items-center relative md:-ml-20 touch-pan-y">
                     <!-- Background Circle -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
