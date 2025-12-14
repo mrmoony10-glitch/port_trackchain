@@ -147,6 +147,9 @@
                     혁신적인 금융과<br>
                     기술의 접목
                 </h1>
+                <div class="md:hidden mt-8 flex justify-center">
+                     <!-- Mobile Visual Placeholder -->
+                </div>
             </div>
         </div>
         
@@ -200,34 +203,32 @@
     </section>
 
     <!-- PART 03: BUSINESS Section -->
-    <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-24 md:py-0">
+    <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-16 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- Changed gap-10 to gap-5 to reduce mobile spacing to 20px -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-12">
                 <!-- Text & Tabs & Title Group -->
                 <div class="w-full md:w-1/2 flex flex-col items-center text-center md:items-start md:text-left">
                     
                     <!-- Title -->
-                    <!-- Changed mb-5 to mb-5 md:mb-10 to set 40px gap on web -->
-                    <h2 class="text-4xl md:text-[44px] font-bold mb-5 md:mb-10 text-center md:text-left">BUSINESS</h2>
+                    <h2 class="text-4xl md:text-[44px] font-bold mb-5 md:mb-12 text-center md:text-left">BUSINESS</h2>
 
                     <!-- Tab Headers -->
                     <div id="tab-container" class="relative flex gap-8 mb-5 overflow-x-auto w-full justify-center md:justify-start pb-[10px]">
                         <button onclick="switchTab('redart')" id="btn-redart" class="group outline-none relative">
-                            <span id="text-redart" class="text-2xl font-bold text-black transition-colors whitespace-nowrap">redart</span>
+                            <span id="text-redart" class="text-[20px] font-bold text-black transition-colors whitespace-nowrap">redart</span>
                         </button>
                         <button onclick="switchTab('pick')" id="btn-pick" class="group outline-none relative">
-                            <span id="text-pick" class="text-2xl font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">Pick</span>
+                            <span id="text-pick" class="text-[20px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">Pick</span>
                         </button>
                         <button onclick="switchTab('tcwallet')" id="btn-tcwallet" class="group outline-none relative">
-                            <span id="text-tcwallet" class="text-2xl font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">TC Wallet</span>
+                            <span id="text-tcwallet" class="text-[20px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">TC Wallet</span>
                         </button>
                         <div id="tab-indicator" class="absolute bottom-0 h-1 bg-[#FF6D2B] transition-all duration-300 ease-out"></div>
                     </div>
 
-                    <!-- Tab Contents Wrapper -->
-                    <!-- Changed min-h-[240px] to h-auto md:h-[240px] -->
-                    <!-- Mobile: auto height to remove extra space. Desktop: fixed height to prevent layout shift -->
-                    <div class="h-auto md:h-[240px] w-full flex flex-col items-center md:items-start">
+                    <!-- Tab Contents Wrapper with Fixed Height -->
+                    <div class="h-auto md:h-[280px] w-full flex flex-col items-center md:items-start">
                         <!-- Tab Contents -->
                         <div id="content-redart" class="text-content block animate-fade-in w-full">
                             <h3 class="text-[30px] font-bold mb-2">레드아트</h3>
@@ -253,11 +254,10 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
                     
                     <!-- Phone Mockup Container -->
-                    <!-- Updated height to 632px on desktop as requested (from 636px) -->
-                    <div class="relative w-[236px] h-[476px] md:w-[314px] md:h-[632px] z-10 border-0 rounded-[3.25rem] shadow-xl bg-white">
+                    <!-- Reduced desktop size: md:w-[314px] -> md:w-[310px], md:h-[628px] -> md:h-[624px] -->
+                    <div class="relative w-[236px] h-[476px] md:w-[310px] md:h-[624px] z-10 border-0 rounded-[52px] md:rounded-[92px] shadow-xl bg-white">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
                         <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
-                            <!-- Reduced inner rounded to rounded-[28px] -->
                             <div class="w-full h-full rounded-[28px] overflow-hidden bg-gray-200 relative">
                                 <img id="screen-redart" src="img/phone_01.png" alt="redart 이미지" class="screen-img block w-full h-full object-cover animate-fade-in absolute inset-0">
                                 <img id="screen-pick" src="img/phone_02.png" alt="Pick 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
@@ -467,6 +467,38 @@
                     img.classList.remove('block');
                 }
             });
+        }
+
+        // Swipe Logic for Business Section
+        const swipeArea = document.getElementById('business-swipe-area');
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        if (swipeArea) {
+            swipeArea.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            swipeArea.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+        }
+
+        function handleSwipe() {
+            const tabs = ['redart', 'pick', 'tcwallet'];
+            const currentIndex = tabs.indexOf(currentTabId);
+            const minSwipeDistance = 50;
+
+            if (touchEndX < touchStartX - minSwipeDistance) {
+                // Swiped Left (Next Tab)
+                const nextIndex = (currentIndex + 1) % tabs.length;
+                switchTab(tabs[nextIndex]);
+            } else if (touchEndX > touchStartX + minSwipeDistance) {
+                // Swiped Right (Prev Tab)
+                const prevIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                switchTab(tabs[prevIndex]);
+            }
         }
 
         window.addEventListener('load', function() {
