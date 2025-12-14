@@ -256,7 +256,9 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
                     
                     <!-- Phone Mockup Container -->
-                    <div class="relative w-[236px] h-[476px] md:w-[314px] md:h-[632px] z-10 border-0 rounded-[52px] md:rounded-[92px] shadow-xl bg-white">
+                    <!-- Reduced height by 2px (1px top/bottom) to hide white background box completely -->
+                    <!-- Mobile: h-[476px] -> h-[474px], Web: md:h-[632px] -> md:h-[630px] -->
+                    <div class="relative w-[236px] h-[474px] md:w-[314px] md:h-[630px] z-10 border-0 rounded-[52px] md:rounded-[92px] shadow-xl bg-white">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
                         <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
                             <div class="w-full h-full rounded-[28px] overflow-hidden bg-gray-200 relative">
