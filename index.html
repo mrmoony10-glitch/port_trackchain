@@ -157,7 +157,6 @@
     </section>
 
     <!-- PART 02: VALUE & VISION Section -->
-    <!-- Changed py-24 to py-16 (64px) -->
     <section id="value" class="snap-start relative min-h-screen bg-white flex items-center w-full py-16 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full md:pt-5">
             <div class="flex flex-col md:flex-row md:items-start">
@@ -201,7 +200,6 @@
     </section>
 
     <!-- PART 03: BUSINESS Section -->
-    <!-- Changed py-24 to py-16 (64px) -->
     <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-16 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-12">
@@ -226,23 +224,20 @@
                     </div>
 
                     <!-- Tab Contents Wrapper with Fixed Height -->
-                    <div class="h-auto md:h-[280px] w-full flex flex-col items-center md:items-start">
+                    <div class="min-h-[240px] w-full flex flex-col items-center md:items-start">
                         <!-- Tab Contents -->
                         <div id="content-redart" class="text-content block animate-fade-in w-full">
-                            <!-- Changed mb-2 to mb-1 (4px) -->
-                            <h3 class="text-[30px] font-bold mb-1">레드아트</h3>
+                            <h3 class="text-[20px] font-bold mb-2">레드아트</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">레드아트를 통해 전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 소통할 수 있습니다.</p>
                         </div>
                         <div id="content-pick" class="text-content hidden animate-fade-in w-full">
-                            <!-- Changed mb-2 to mb-1 -->
-                            <h3 class="text-[30px] font-bold mb-1">픽 (Pick)</h3>
+                            <h3 class="text-[20px] font-bold mb-2">픽 (Pick)</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">다양한 유형의 디지털 자산 월렛을 연결합니다. 개인형부터 중앙형까지 간단하게 액세스하고, 디지털 자산 포트폴리오를 한 눈에 파악하세요.</p>
                         </div>
                         <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
-                            <!-- Changed mb-2 to mb-1 -->
-                            <h3 class="text-[30px] font-bold mb-1">TC Wallet</h3>
+                            <h3 class="text-[20px] font-bold mb-2">TC Wallet</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
@@ -255,13 +250,13 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
                     
                     <!-- Phone Mockup Container -->
-                    <!-- Reduced size to w-[236px] h-[476px] and md:w-[314px] md:h-[636px] to hide white edges -->
-                    <!-- Changed rounded-[2rem] to rounded-[28px] (approx 1.75rem, reduced by 4px from 32px) -->
-                    <div class="relative w-[236px] h-[476px] md:w-[314px] md:h-[636px] z-10 border-0 rounded-[28px] shadow-xl bg-white">
+                    <!-- Reduced size to fix white box overflow: w-[236px] h-[476px] (md: w-[314px] h-[636px]) -->
+                    <!-- Increased container rounded to rounded-[3.25rem] (approx 52px) -->
+                    <div class="relative w-[236px] h-[476px] md:w-[314px] md:h-[636px] z-10 border-0 rounded-[3.25rem] shadow-xl bg-white">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
                         <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
-                            <!-- Changed rounded-[2rem] to rounded-[28px] to match container -->
-                            <div class="w-full h-full rounded-[28px] overflow-hidden bg-gray-200 relative">
+                            <!-- Reduced image rounded to rounded-[24px] -->
+                            <div class="w-full h-full rounded-[24px] overflow-hidden bg-gray-200 relative">
                                 <img id="screen-redart" src="img/phone_01.png" alt="redart 이미지" class="screen-img block w-full h-full object-cover animate-fade-in absolute inset-0">
                                 <img id="screen-pick" src="img/phone_02.png" alt="Pick 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
                                 <img id="screen-tcwallet" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
