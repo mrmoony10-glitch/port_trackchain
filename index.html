@@ -205,7 +205,7 @@
     <!-- PART 03: BUSINESS Section -->
     <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-16 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <!-- Changed gap-10 to gap-5 to reduce mobile spacing to 20px -->
+            <!-- Changed gap-10 to gap-5 (20px) on mobile -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-12">
                 <!-- Text & Tabs & Title Group -->
                 <div class="w-full md:w-1/2 flex flex-col items-center text-center md:items-start md:text-left">
@@ -249,13 +249,13 @@
                 </div>
 
                 <!-- Phone Mockup Image Area -->
-                <div class="w-full md:w-1/2 flex justify-center items-center relative md:-ml-20">
+                <!-- Added ID for swipe logic and touch-pan-y -->
+                <div id="business-swipe-area" class="w-full md:w-1/2 flex justify-center items-center relative md:-ml-20 touch-pan-y">
                     <!-- Background Circle -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
                     
                     <!-- Phone Mockup Container -->
-                    <!-- Reduced desktop size: md:w-[314px] -> md:w-[310px], md:h-[628px] -> md:h-[624px] -->
-                    <div class="relative w-[236px] h-[476px] md:w-[310px] md:h-[624px] z-10 border-0 rounded-[52px] md:rounded-[92px] shadow-xl bg-white">
+                    <div class="relative w-[236px] h-[476px] md:w-[314px] md:h-[632px] z-10 border-0 rounded-[52px] md:rounded-[92px] shadow-xl bg-white">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
                         <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
                             <div class="w-full h-full rounded-[28px] overflow-hidden bg-gray-200 relative">
