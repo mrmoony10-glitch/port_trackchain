@@ -143,13 +143,10 @@
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
             <div class="animate-[fadeInUp_1s_ease-out_forwards] flex flex-col items-center md:items-start text-center md:text-left w-full">
-                <!-- Changed mb-6 to mb-4 (16px) for mobile, kept md:mb-6 (24px) for desktop -->
-                <h1 class="text-[40px] leading-[50px] md:text-[64px] md:leading-[80px] font-bold mb-4 md:mb-6 break-keep drop-shadow-md">
+                <h1 class="text-[40px] leading-[50px] md:text-[64px] md:leading-[80px] font-bold mb-6 break-keep drop-shadow-md">
                     혁신적인 금융과<br>
                     기술의 접목
                 </h1>
-                <!-- Added Description Text with Line Break for Mobile -->
-                <!-- Added drop-shadow and text-shadow for better visibility on mobile background -->
                 <p class="text-[16px] text-white leading-relaxed max-w-[600px] break-keep drop-shadow-lg [text-shadow:_0_2px_10px_rgba(0,0,0,0.8)]">
                     블록체인 기술을 바탕으로 산업 간 협력을 이끌어내며,<br>기존 비즈니스에 새로운 가치를 더하는 <br class="md:hidden">통합 플랫폼 솔루션을 제공합니다.
                 </p>
@@ -267,25 +264,24 @@
                         <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
                             <h3 class="text-[24px] md:text-[30px] font-bold mb-1">TC Wallet</h3>
                             <p class="text-[16px] font-bold mb-1 text-gray-800">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
-                            <!-- Updated text with line break before '편의성을' and removed '엔터프라이즈' -->
-                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과<br>편의성을 제공하는 월렛 솔루션입니다.</p>
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phone Mockup Image Area -->
-                <div id="business-swipe-area" class="order-3 md:order-none w-full md:w-1/2 flex justify-center items-center relative md:-ml-20 touch-pan-y gap-[30px]">
-                    <!-- Background Circle -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[460px] md:h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
+                <!-- DESKTOP PHONE MOCKUP (Visible only on Desktop, Right side) -->
+                <div id="business-swipe-area-desktop" class="w-full md:w-1/2 justify-center items-center relative hidden md:flex md:-ml-20 touch-pan-y">
+                    <!-- Background Circle Desktop -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] bg-[#EBEBEB] rounded-full z-0"></div>
                     
-                    <!-- Phone Mockup Container -->
-                    <div class="relative w-[194px] h-[390px] md:w-[314px] md:h-[630px] z-10 border-0 rounded-[40px] md:rounded-[92px] shadow-xl bg-white">
+                    <!-- Phone Mockup Container Desktop -->
+                    <div class="relative w-[310px] h-[624px] z-10 border-0 rounded-[92px] shadow-xl bg-white">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none">
                         <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
-                            <div class="w-full h-full rounded-[20px] md:rounded-[28px] overflow-hidden bg-gray-200 relative">
-                                <img id="screen-redart" src="img/phone_01.png" alt="redart 이미지" class="screen-img block w-full h-full object-cover animate-fade-in absolute inset-0">
-                                <img id="screen-pick" src="img/phone_02.png" alt="Pick 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
-                                <img id="screen-tcwallet" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img hidden w-full h-full object-cover animate-fade-in absolute inset-0">
+                            <div class="w-full h-full rounded-[28px] overflow-hidden bg-gray-200 relative">
+                                <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart 이미지" class="screen-img-desktop block w-full h-full object-cover animate-fade-in absolute inset-0">
+                                <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick 이미지" class="screen-img-desktop hidden w-full h-full object-cover animate-fade-in absolute inset-0">
+                                <img id="screen-tcwallet-desktop" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img-desktop hidden w-full h-full object-cover animate-fade-in absolute inset-0">
                             </div>
                         </div>
                     </div>
@@ -481,7 +477,6 @@
                 }
             });
 
-            // Update images for both mobile and desktop
             const imagesMobile = document.querySelectorAll('.screen-img-mobile');
             imagesMobile.forEach(img => {
                 const imgId = img.id.replace('-mobile', '').replace('screen-', '');
