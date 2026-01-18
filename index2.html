@@ -297,11 +297,9 @@
                 <!-- Text & Tabs Group -->
                 <div class="contents md:flex md:w-1/2 md:flex-col md:items-start md:text-left md:pl-[104px] z-10">
                     
-                    <!-- 수정: 모바일 마진 mb-8 -> mb-6 로 축소 -->
                     <h2 class="order-1 md:order-none text-[44px] leading-[54px] font-bold mb-6 md:mb-12 text-center md:text-left text-gray-900">BUSINESS</h2>
 
                     <!-- Tab Headers -->
-                    <!-- 수정: 모바일 마진 mb-10 -> mb-6 로 축소 -->
                     <div class="order-2 md:order-none w-full flex justify-center md:justify-start mb-6 md:mb-12">
                         <div id="tab-container" class="inline-flex bg-white p-1.5 rounded-full border border-gray-200 shadow-sm gap-1 overflow-x-auto max-w-full no-scrollbar">
                             <button onclick="switchTab('redart')" id="btn-redart" class="h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold transition-all duration-300 whitespace-nowrap bg-black text-white shadow-md flex items-center justify-center">
@@ -340,14 +338,10 @@
                 </div>
 
                 <!-- MOBILE PHONE MOCKUP -->
-                <!-- 수정: 모바일 마진 mb-12 -> mb-8 로 축소 -->
                 <div id="business-swipe-area-mobile" class="order-3 md:order-none w-full flex justify-center items-center relative mb-8 md:mb-0 md:hidden touch-pan-y py-4">
-                    <!-- 수정: 배경 원 크기 w-420 -> w-360 으로 축소, 그라데이션 더 진하게(40) -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
-                    <!-- 수정: 핸드폰 크기 w-280 -> w-240, h-560 -> h-480 으로 축소 -->
                     <div class="relative w-[240px] h-[480px] z-10 border-0 rounded-none shadow-2xl bg-white transform transition-transform hover:scale-105 duration-300">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/240x480/transparent/transparent';">
-                        <!-- 수정: 내부 패딩 p-15 -> p-12 로 비율에 맞춰 조정 -->
                         <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
                             <div class="w-full h-full rounded-none overflow-hidden bg-gray-100 relative">
                                 <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/216x456/eee/ccc?text=redart+App';">
@@ -360,13 +354,11 @@
 
                 <!-- DESKTOP PHONE MOCKUP -->
                 <div id="business-swipe-area-desktop" class="w-full md:w-1/2 justify-center items-center relative hidden md:flex md:-ml-20 md:-translate-x-[30px] touch-pan-y">
-                    <!-- 수정: 그라데이션 더 진하게(30) -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
                     <div class="relative w-[320px] h-[640px] z-10 border-0 rounded-none shadow-2xl bg-white transform transition-transform hover:scale-105 duration-500">
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
                         <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
                             <div class="w-full h-full rounded-none overflow-hidden bg-gray-100 relative shadow-inner">
-                                <!-- 수정: screen-img-desktop 클래스 추가 -->
                                 <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=Pick+App';">
                                 <img id="screen-tcwallet-desktop" src="img/phone_03.png" alt="TC Wallet" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=TC+Wallet+App';">
@@ -388,7 +380,7 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
                 <!-- News Card 1 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white">
                     <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
@@ -406,7 +398,6 @@
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.1s;">
                     <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News">
-                         <!-- 수정: PRESS -> NEWS 로 변경 -->
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
                     </div>
                     <div class="flex-1">
@@ -513,7 +504,6 @@
              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
                  <div class="flex flex-col md:flex-row gap-16 items-center">
                      <!-- Text -->
-                     <!-- 수정: text-center md:text-left 추가 (모바일 중앙, 데스크탑 좌측) -->
                      <div class="md:w-1/2 reveal text-center md:text-left">
                          <h2 class="text-[44px] leading-[54px] font-bold mb-6">CONTACT US</h2>
                          <p class="text-[16px] leading-[26px] text-gray-400 mb-8 break-keep">
