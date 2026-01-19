@@ -205,7 +205,6 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
             <div class="animate-[fadeInUp_1s_ease-out_forwards] flex flex-col items-center md:items-start text-center md:text-left w-full">
                 <span class="text-primary font-bold tracking-widest mb-4 animate-fade-in drop-shadow-md">INNOVATION & TECHNOLOGY</span>
-                <!-- 수정: 모바일 폰트 사이즈 40px -> 44px 로 확대 -->
                 <h1 class="text-[44px] leading-[54px] md:text-[64px] md:leading-[80px] font-bold mb-6 break-keep drop-shadow-xl">
                     혁신적인 금융과<br>
                     <span class="text-gradient">기술의 접목</span>
@@ -240,7 +239,6 @@
             <div class="flex flex-col md:flex-row md:items-start">
                 <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left md:sticky md:top-32">
                     <span class="text-primary font-bold tracking-widest text-[16px] leading-[26px] mb-2 block">OUR MISSION</span>
-                    <!-- 수정: 폰트 사이즈 44px -> 40px 로 축소 -->
                     <h2 class="text-[40px] leading-[50px] font-bold text-gray-900">VALUE & VISION</h2>
                     <p class="mt-6 text-gray-500 leading-relaxed break-keep max-w-md mx-auto md:mx-0">
                         트랙체인은 기술을 통해 새로운 금융의 미래를 그려갑니다.
@@ -299,7 +297,6 @@
                 <!-- Text & Tabs Group -->
                 <div class="contents md:flex md:w-1/2 md:flex-col md:items-start md:text-left md:pl-[104px] z-10">
                     
-                    <!-- 수정: 폰트 사이즈 44px -> 40px 로 축소 -->
                     <h2 class="order-1 md:order-none text-[40px] leading-[50px] font-bold mb-6 md:mb-12 text-center md:text-left text-gray-900">BUSINESS</h2>
 
                     <!-- Tab Headers -->
@@ -347,10 +344,17 @@
                 <!-- MOBILE PHONE MOCKUP -->
                 <div id="business-swipe-area-mobile" class="order-3 md:order-none w-full flex justify-center items-center relative mb-8 md:mb-0 md:hidden touch-pan-y py-4">
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
-                    <div class="relative w-[240px] h-[480px] z-10 border-0 rounded-none shadow-2xl bg-white transform transition-transform hover:scale-105 duration-300">
+                    
+                    <div class="relative w-[240px] h-[480px] z-10 transform transition-transform hover:scale-105 duration-300">
+                        
+                        <!-- 수정: 라운드값 36px -> 32px 변경 -->
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[32px] shadow-2xl z-0"></div>
+
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/240x480/transparent/transparent';">
+                        
                         <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
-                            <div class="w-full h-full rounded-none overflow-hidden bg-gray-100 relative">
+                            <!-- 수정: 프레임 라운드(32px) - 패딩(12px) = 20px 라운드 적용 -->
+                            <div class="w-full h-full rounded-[20px] overflow-hidden bg-gray-100 relative">
                                 <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/216x456/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-mobile" src="img/phone_02.png" alt="Pick" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/216x456/eee/ccc?text=Pick+App';">
                                 <img id="screen-tcwallet-mobile" src="img/phone_03.png" alt="TC Wallet" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/216x456/eee/ccc?text=TC+Wallet+App';">
@@ -362,10 +366,17 @@
                 <!-- DESKTOP PHONE MOCKUP -->
                 <div id="business-swipe-area-desktop" class="w-full md:w-1/2 justify-center items-center relative hidden md:flex md:-ml-20 md:-translate-x-[30px] touch-pan-y">
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
-                    <div class="relative w-[320px] h-[640px] z-10 border-0 rounded-none shadow-2xl bg-white transform transition-transform hover:scale-105 duration-500">
+                    
+                    <div class="relative w-[320px] h-[640px] z-10 transform transition-transform hover:scale-105 duration-500">
+                        
+                        <!-- 수정: 라운드값 36px -> 32px 변경 -->
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[32px] shadow-2xl z-0"></div>
+
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
+                        
                         <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
-                            <div class="w-full h-full rounded-none overflow-hidden bg-gray-100 relative shadow-inner">
+                            <!-- 수정: 프레임 라운드(32px) - 패딩(18px) = 14px 라운드 적용 -->
+                            <div class="w-full h-full rounded-[14px] overflow-hidden bg-gray-100 relative shadow-inner">
                                 <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=Pick+App';">
                                 <img id="screen-tcwallet-desktop" src="img/phone_03.png" alt="TC Wallet" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=TC+Wallet+App';">
@@ -384,7 +395,6 @@
             <div class="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-12 reveal text-center md:text-left">
                 <div class="w-full md:w-auto">
                     <span class="text-primary font-bold tracking-wider uppercase">Newsroom</span>
-                    <!-- 수정: 폰트 사이즈 44px -> 40px 로 축소 -->
                     <h2 class="text-[40px] leading-[50px] font-bold text-gray-900 mt-2">PRESS</h2>
                 </div>
             </div>
@@ -451,7 +461,6 @@
         <!-- Top Half: Partners (Infinite Scroll) -->
         <div class="bg-darkLighter flex-shrink-0 py-16 flex flex-col justify-center">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center reveal w-full">
-                <!-- 수정: 폰트 사이즈 44px -> 40px 로 축소 -->
                 <h2 class="text-[40px] leading-[50px] font-bold">Trusted Partners</h2>
                 <p class="text-gray-400 mt-2">다양한 산업의 리더들과 함께 혁신을 만들어갑니다.</p>
             </div>
@@ -515,7 +524,6 @@
                  <div class="flex flex-col md:flex-row gap-16 items-center">
                      <!-- Text -->
                      <div class="md:w-1/2 reveal text-center md:text-left">
-                         <!-- 수정: 폰트 사이즈 44px -> 40px 로 축소 -->
                          <h2 class="text-[40px] leading-[50px] font-bold mb-6">CONTACT US</h2>
                          <p class="text-[16px] leading-[26px] text-gray-400 mb-8 break-keep">
                              트랙체인과 함께 Web3 비즈니스를<br>성공적으로 이끌어갈 파트너를 기다립니다.
