@@ -32,10 +32,10 @@
                     },
                     boxShadow: {
                         'card': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
-                        // 수정: 기존 그림자 + 상단 경계 구분을 위한 은은한 전체 그림자(Ambient) 추가
-                        'mockup': '0 20px 50px -12px rgba(0, 0, 0, 0.2), 0 0 20px -5px rgba(0, 0, 0, 0.1)', 
-                        // 수정: 모바일용 그림자 + 상단 경계 구분을 위한 은은한 전체 그림자(Ambient) 추가
-                        'mockup-mobile': '0 10px 20px -5px rgba(0, 0, 0, 0.2), 0 0 15px -3px rgba(0, 0, 0, 0.1)',
+                        // 수정: 앰비언트 섀도우 제거하고 이전 단계(진한 그림자)로 복구
+                        'mockup': '0 20px 50px -12px rgba(0, 0, 0, 0.2)', 
+                        // 수정: 앰비언트 섀도우 제거하고 이전 단계(진한 그림자)로 복구
+                        'mockup-mobile': '0 10px 20px -5px rgba(0, 0, 0, 0.2)',
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
