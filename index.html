@@ -246,22 +246,25 @@
                     </p>
                 </div>
                 
-                <div class="md:w-2/3 space-y-6 md:pl-[80px]">
-                    <!-- Item 1: Reveal Animation Added -->
-                    <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
+                <!-- 수정: flex flex-col md:items-end 추가하여 우측 정렬 -->
+                <div class="md:w-auto flex-1 space-y-6 md:pl-[80px] flex flex-col md:items-end">
+                    <!-- Item 1: Text Updated -->
+                    <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]">
                         <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                             <div class="flex-shrink-0 transition-colors">
                                 <img src="img/img_value01.gif" alt="WEB3 여정의 파트너" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=V1';">
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">WEB3 여정의 파트너</h3>
-                                <p class="text-gray-600 leading-relaxed break-keep">우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만듭니다. 복잡한 기술을 직관적인 경험으로 바꿉니다.</p>
+                                <p class="text-gray-600 leading-relaxed break-keep">
+                                    우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만들며, 복잡한 기술을 직관적인 경험으로 바꿉니다.
+                                </p>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Item 2: Reveal Animation Added (delay 0.1s) -->
-                    <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1" style="transition-delay: 0.1s;">
+                    <!-- Item 2: Reveal Animation Added (delay 0.1s) + Width Fixed to 700px -->
+                    <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]" style="transition-delay: 0.1s;">
                         <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                             <div class="flex-shrink-0 transition-colors">
                                 <img src="img/img_value02.gif" alt="시대 흐름에 맞춘 WEB3 기술 활용" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=V2';">
@@ -273,8 +276,8 @@
                         </div>
                     </div>
                     
-                    <!-- Item 3: Reveal Animation Added (delay 0.2s) -->
-                    <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1" style="transition-delay: 0.2s;">
+                    <!-- Item 3: Reveal Animation Added (delay 0.2s) + Width Fixed to 700px -->
+                    <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]" style="transition-delay: 0.2s;">
                         <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                             <div class="flex-shrink-0 transition-colors">
                                 <img src="img/img_value03.gif" alt="WEB3 금융·보안 솔루션 제공" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=V3';">
@@ -339,20 +342,13 @@
                 </div>
 
                 <!-- MOBILE PHONE MOCKUP -->
-                <!-- 수정: reveal 클래스와 transition-delay 추가 -->
                 <div id="business-swipe-area-mobile" class="reveal order-3 md:order-none w-full flex justify-center items-center relative mb-8 md:mb-0 md:hidden touch-pan-y py-4" style="transition-delay: 0.2s;">
-                    <!-- 수정: 배경 원 크기 w-360 -> w-340 으로 축소 -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
                     
                     <div class="relative w-[220px] h-[440px] z-10 transform transition-transform hover:scale-105 duration-300">
-                        
-                        <!-- 수정: 모바일 라운드 38px로 고정 -->
                         <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[38px] shadow-2xl z-0"></div>
-
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/220x440/transparent/transparent';">
-                        
                         <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
-                            <!-- 수정: 프레임 라운드(38px) - 패딩(12px) = 26px 라운드 적용 -->
                             <div class="w-full h-full rounded-[26px] overflow-hidden bg-gray-100 relative">
                                 <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-mobile" src="img/phone_02.png" alt="Pick" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=Pick+App';">
@@ -363,19 +359,13 @@
                 </div>
 
                 <!-- DESKTOP PHONE MOCKUP -->
-                <!-- 수정: reveal 클래스와 transition-delay 추가 -->
                 <div id="business-swipe-area-desktop" class="reveal w-full md:w-1/2 justify-center items-center relative hidden md:flex md:-ml-20 md:-translate-x-[30px] touch-pan-y" style="transition-delay: 0.2s;">
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
                     
                     <div class="relative w-[320px] h-[640px] z-10 transform transition-transform hover:scale-105 duration-500">
-                        
-                        <!-- 수정: 웹 라운드값 48px로 변경 -->
                         <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[48px] shadow-2xl z-0"></div>
-
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
-                        
                         <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
-                            <!-- 수정: 프레임 라운드(48px) - 패딩(18px) = 30px 라운드 적용 -->
                             <div class="w-full h-full rounded-[30px] overflow-hidden bg-gray-100 relative shadow-inner">
                                 <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=Pick+App';">
