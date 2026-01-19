@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRACKCHAIN - 혁신적인 금융과 기술의 접목</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Pretendard Web Font Connection -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#FF6D2B', // 디자인 시스템에 맞춰 변경 (#FF5A00 -> #FF6D2B)
+                        primary: '#FF6D2B',
+                        primaryHover: '#E55A1B',
                         dark: '#111111',
+                        darkLighter: '#1A1A1A',
                         light: '#F8F9FA',
-                        gray: { // 디자인 시스템 그레이 스케일 적용
+                        gray: {
                             900: '#111111',
                             600: '#4B5563',
                             400: '#9CA3AF',
@@ -23,8 +28,34 @@
                         }
                     },
                     fontFamily: {
-                        // 폰트 통일: Pretendard만 남김
-                        sans: ['Pretendard', 'sans-serif'],
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'scroll': 'scroll 25s linear infinite', 
+                        'scroll-reverse': 'scrollReverse 25s linear infinite', 
+                        'pulse-slow': 'slowPulse 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        scrollReverse: {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        slowPulse: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.6', transform: 'scale(1.05)' },
+                        }
                     }
                 }
             }
@@ -37,14 +68,12 @@
             overflow-y: scroll;
         }
         
-        /* Disable scroll snap on very short screens to avoid trapping */
         @media (max-height: 600px) {
             html {
                 scroll-snap-type: none;
             }
         }
 
-        /* Hide Scrollbar but keep functionality */
         body {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -53,22 +82,38 @@
             display: none;
         }
 
-        /* Nav Link Active State Styles */
+        /* Hide Scrollbar for specific elements */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
         .nav-link.active .nav-dot {
             opacity: 1;
         }
         .nav-link.active span {
-            color: #FF6D2B; /* 브랜드 컬러 통일 */
+            color: #FF6D2B;
             font-weight: 700;
         }
-        
-        /* Fade In Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #FF6D2B, #FF9A6C);
         }
-        .animate-fade-in {
-            animation: fadeIn 0.4s ease-in-out;
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -89,35 +134,37 @@
                 <!-- Desktop Menu -->
                 <div class="hidden lg:block">
                     <div class="ml-10 flex items-center space-x-8">
-                        <!-- Menu Items -->
                         <a href="#main" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="main">
-                            <!-- Updated to #FF6D2B -->
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">MAIN</span>
+                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">MAIN</span>
                         </a>
                         <a href="#value" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="value">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">VALUE & VISION</span>
+                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">VALUE & VISION</span>
                         </a>
                         <a href="#business" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="business">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">BUSINESS</span>
+                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">BUSINESS</span>
                         </a>
                         <a href="#press" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="press">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">PRESS</span>
+                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">PRESS</span>
                         </a>
-                        <a href="#partners-contact-section" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="partners-contact-section">
+                        <a href="#partners-contact" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="partners-contact">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">PARTNERS</span>
+                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">PARTNERS</span>
+                        </a>
+
+                        <a href="#partners-contact" class="h-[44px] px-6 flex items-center justify-center bg-primary hover:bg-primaryHover text-white text-sm font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-primary/30 ml-4">
+                            CONTACT US
                         </a>
                     </div>
                 </div>
                 
                 <!-- Mobile Hamburger Button -->
                 <div class="flex lg:hidden z-20 absolute right-0 top-1/2 transform -translate-y-1/2 mr-2">
-                    <button onclick="toggleMenu()" class="text-white hover:text-primary focus:outline-none p-2">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <button onclick="toggleMenu()" class="text-white hover:text-primary focus:outline-none p-2 transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
@@ -127,85 +174,114 @@
     </nav>
 
     <!-- Mobile Fullscreen Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black z-[60] transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
         <div class="flex justify-end p-6 absolute top-0 right-0 w-full">
-            <button onclick="toggleMenu()" class="text-white hover:text-primary transition-colors">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <button onclick="toggleMenu()" class="text-white hover:text-primary transition-colors p-2">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
         <div class="flex flex-col px-10 space-y-8 h-full justify-center text-center">
-            <a href="#main" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">MAIN</a>
-            <a href="#value" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">VALUE & VISION</a> 
-            <a href="#business" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">BUSINESS</a> 
-            <a href="#press" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">PRESS</a>
-            <a href="#partners-contact-section" onclick="handleMobileClick(this)" class="mobile-menu-item text-4xl font-medium text-white hover:text-primary transition-colors">PARTNERS</a>
+            <a href="#main" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-white hover:text-primary transition-all hover:scale-105">MAIN</a>
+            <a href="#value" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-white hover:text-primary transition-all hover:scale-105">VALUE & VISION</a> 
+            <a href="#business" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-white hover:text-primary transition-all hover:scale-105">BUSINESS</a> 
+            <a href="#press" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-white hover:text-primary transition-all hover:scale-105">PRESS</a>
+            <a href="#partners-contact" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-white hover:text-primary transition-all hover:scale-105">PARTNERS</a>
+            <a href="#partners-contact" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-primary hover:text-white transition-all hover:scale-105 mt-4">CONTACT US</a>
         </div>
     </div>
 
     <!-- PART 01: MAIN HERO Section -->
     <section id="main" class="snap-start relative min-h-screen h-[100dvh] bg-dark overflow-hidden flex items-center justify-center text-white w-full">
         <!-- Backgrounds -->
-        <img src="img/bg_mobile.png" alt="Mobile Background" class="absolute inset-0 w-full h-full object-cover md:hidden z-0" onerror="this.onerror=null; this.src='https://placehold.co/600x900/111/333?text=Mobile+BG';">
-        <img src="img/bg_web.png" alt="Web Background" class="absolute inset-0 w-full h-full object-cover hidden md:block z-0" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/111/333?text=Web+BG';">
+        <div class="absolute inset-0 z-0">
+             <img src="img/bg_mobile.png" alt="Mobile Background" class="absolute inset-0 w-full h-full object-cover md:hidden" onerror="this.onerror=null; this.src='https://placehold.co/600x900/111/333?text=Mobile+BG';">
+             <img src="img/bg_web.png" alt="Web Background" class="absolute inset-0 w-full h-full object-cover hidden md:block" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/111/333?text=Web+BG';">
+             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+             <div class="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-primary/30 rounded-full blur-[100px] md:blur-[140px] pointer-events-none animate-pulse-slow"></div>
+        </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
             <div class="animate-[fadeInUp_1s_ease-out_forwards] flex flex-col items-center md:items-start text-center md:text-left w-full">
-                <h1 class="text-[40px] leading-[50px] md:text-[64px] md:leading-[80px] font-bold mb-6 break-keep drop-shadow-md">
+                <span class="text-primary font-bold tracking-widest mb-4 animate-fade-in drop-shadow-md">INNOVATION & TECHNOLOGY</span>
+                <h1 class="text-[44px] leading-[54px] md:text-[64px] md:leading-[80px] font-bold mb-6 break-keep drop-shadow-xl">
                     혁신적인 금융과<br>
-                    기술의 접목
+                    <span class="text-gradient">기술의 접목</span>
                 </h1>
-                <p class="text-[16px] text-white leading-relaxed max-w-[600px] break-keep drop-shadow-lg [text-shadow:_0_2px_10px_rgba(0,0,0,0.8)]">
+                <p class="text-[16px] md:text-[18px] text-gray-200 leading-relaxed max-w-[600px] break-keep drop-shadow-lg">
                     블록체인 기술을 바탕으로 산업 간 협력을 이끌어내며,<br>기존 비즈니스에 새로운 가치를 더하는 <br class="md:hidden">통합 플랫폼 솔루션을 제공합니다.
                 </p>
-                <div class="md:hidden mt-8 flex justify-center"></div>
+                
+                <div class="mt-10 flex gap-4">
+                    <a href="#business" class="w-[144px] text-center px-4 py-3 bg-primary text-white font-bold rounded-full hover:bg-orange-600 transition-colors shadow-lg hover:shadow-orange-500/30">
+                        서비스 소개
+                    </a>
+                    <a href="#partners-contact" class="w-[144px] text-center px-4 py-3 border border-white/30 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/10 transition-colors">
+                        문의하기
+                    </a>
+                </div>
             </div>
         </div>
         
-        <div class="absolute bottom-[50px] w-full text-center animate-bounce z-20">
-            <p class="text-xs tracking-widest mb-2 uppercase text-gray-400 drop-shadow-md">Scroll Down</p>
-            <i class="fas fa-arrow-down text-white drop-shadow-md"></i>
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-[40px] w-full flex flex-col items-center justify-center z-20 opacity-80 hover:opacity-100 transition-opacity cursor-pointer" onclick="document.getElementById('value').scrollIntoView({behavior: 'smooth'})">
+            <div class="w-[30px] h-[50px] border-2 border-white/50 rounded-full flex justify-center p-2 mb-2">
+                <div class="w-1.5 h-1.5 bg-white rounded-full animate-bounce"></div>
+            </div>
+            <p class="text-[10px] tracking-[0.2em] uppercase text-white/70">Scroll Down</p>
         </div>
     </section>
 
     <!-- PART 02: VALUE & VISION Section -->
-    <section id="value" class="snap-start relative min-h-screen bg-white flex items-center w-full py-16 md:py-0">
+    <section id="value" class="snap-start relative min-h-screen bg-white flex items-center w-full py-20 md:py-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full md:pt-5">
             <div class="flex flex-col md:flex-row md:items-start">
-                <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left">
-                    <h2 class="text-4xl md:text-[44px] font-bold text-gray-900 md:mt-5">VALUE & VISION</h2>
+                <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left md:sticky md:top-32">
+                    <span class="text-primary font-bold tracking-widest text-[16px] leading-[26px] mb-2 block">OUR MISSION</span>
+                    <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold text-gray-900">VALUE & VISION</h2>
+                    <p class="mt-6 text-gray-500 leading-relaxed break-keep max-w-md mx-auto md:mx-0">
+                        트랙체인은 기술을 통해 새로운 금융의 미래를 그려갑니다.
+                    </p>
                 </div>
-                <!-- Spacing maintained from previous request (110px) -->
-                <div class="md:w-2/3 space-y-12 md:space-y-16 md:pl-[110px]">
+                
+                <div class="md:w-2/3 space-y-6 md:pl-[80px]">
                     <!-- Item 1 -->
-                    <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-2 md:gap-6 group hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex-shrink-0">
-                            <img src="img/img_value01.gif" alt="WEB3 여정의 파트너" class="w-[96px] h-[96px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/96x96/eee/ccc?text=V1';">
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">WEB3 여정의 파트너</h3>
-                            <p class="text-gray-600 leading-relaxed max-w-[300px] mx-auto md:max-w-[540px] md:mx-0 break-keep">우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만듭니다.</p>
+                    <div class="group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
+                            <div class="flex-shrink-0 transition-colors">
+                                <img src="img/img_value01.gif" alt="WEB3 여정의 파트너" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=V1';">
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">WEB3 여정의 파트너</h3>
+                                <p class="text-gray-600 leading-relaxed break-keep">우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만듭니다. 복잡한 기술을 직관적인 경험으로 바꿉니다.</p>
+                            </div>
                         </div>
                     </div>
+                    
                     <!-- Item 2 -->
-                    <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-2 md:gap-6 group hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex-shrink-0">
-                            <img src="img/img_value02.gif" alt="시대 흐름에 맞춘 WEB3 기술 활용" class="w-[96px] h-[96px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/96x96/eee/ccc?text=V2';">
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">시대 흐름에 맞춘 WEB3 기술 활용</h3>
-                            <p class="text-gray-600 leading-relaxed max-w-[300px] mx-auto md:max-w-[540px] md:mx-0 break-keep">아트 특화 플랫폼 "redart"는 블록체인, NFT 등 Web3 기술 접목으로 아트 시장의 디지털 전환을 돕습니다.</p>
+                    <div class="group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
+                            <div class="flex-shrink-0 transition-colors">
+                                <img src="img/img_value02.gif" alt="시대 흐름에 맞춘 WEB3 기술 활용" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=V2';">
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">시대 흐름에 맞춘 WEB3 기술 활용</h3>
+                                <p class="text-gray-600 leading-relaxed break-keep">아트 특화 플랫폼 "redart"는 블록체인, NFT 등 Web3 기술 접목으로 아트 시장의 디지털 전환을 돕습니다.</p>
+                            </div>
                         </div>
                     </div>
+                    
                     <!-- Item 3 -->
-                    <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-left gap-2 md:gap-6 group hover:-translate-y-2 transition-transform duration-300">
-                        <div class="flex-shrink-0">
-                            <img src="img/img_value03.gif" alt="WEB3 금융·보안 솔루션 제공" class="w-[96px] h-[96px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/96x96/eee/ccc?text=V3';">
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">WEB3 금융·보안 솔루션 제공</h3>
-                            <p class="text-gray-600 leading-relaxed max-w-[300px] mx-auto md:max-w-[540px] md:mx-0 break-keep">금융 및 보안 솔루션 개발 역량을 토대로 전통 금융과 디지털 자산 월렛(중앙형, 개인형)부터 WEB3 금융 서비스(DeFi)까지 디지털 금융의 대중화에 기여합니다.</p>
+                    <div class="group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
+                            <div class="flex-shrink-0 transition-colors">
+                                <img src="img/img_value03.gif" alt="WEB3 금융·보안 솔루션 제공" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=V3';">
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">WEB3 금융·보안 솔루션 제공</h3>
+                                <p class="text-gray-600 leading-relaxed break-keep">전통 금융과 디지털 자산 월렛(중앙형, 개인형)부터 DeFi까지, 강력한 보안 기술을 바탕으로 디지털 금융의 대중화에 기여합니다.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -214,84 +290,98 @@
     </section>
 
     <!-- PART 03: BUSINESS Section -->
-    <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-16 md:py-0">
+    <section id="business" class="snap-start relative min-h-screen bg-gray-50 flex items-center w-full py-20 md:py-0 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-0 md:gap-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-0 md:gap-12 relative">
                 
-                <!-- Text & Tabs & Title Group -->
-                <!-- Spacing maintained from previous request (104px) -->
-                <div class="contents md:flex md:w-1/2 md:flex-col md:items-start md:text-left md:pl-[104px]">
+                <!-- Text & Tabs Group -->
+                <div class="contents md:flex md:w-1/2 md:flex-col md:items-start md:text-left md:pl-[104px] z-10">
                     
-                    <!-- Title -->
-                    <h2 class="order-1 md:order-none text-4xl md:text-[44px] font-bold mb-5 md:mb-12 text-center md:text-left text-gray-900">BUSINESS</h2>
+                    <h2 class="order-1 md:order-none text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold mb-6 md:mb-12 text-center md:text-left text-gray-900">BUSINESS</h2>
 
                     <!-- Tab Headers -->
-                    <div id="tab-container" class="order-2 md:order-none relative flex gap-8 mb-10 md:mb-5 overflow-x-auto w-full justify-center md:justify-start pb-[10px]">
-                        <button onclick="switchTab('redart')" id="btn-redart" class="group outline-none relative">
-                            <span id="text-redart" class="text-[20px] font-bold text-gray-900 transition-colors whitespace-nowrap">redart</span>
-                        </button>
-                        <button onclick="switchTab('pick')" id="btn-pick" class="group outline-none relative">
-                            <span id="text-pick" class="text-[20px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">Pick</span>
-                        </button>
-                        <button onclick="switchTab('tcwallet')" id="btn-tcwallet" class="group outline-none relative">
-                            <span id="text-tcwallet" class="text-[20px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors whitespace-nowrap">TC Wallet</span>
-                        </button>
-                        <!-- Updated to #FF6D2B -->
-                        <div id="tab-indicator" class="absolute bottom-0 h-1 bg-[#FF6D2B] transition-all duration-300 ease-out"></div>
+                    <div class="order-2 md:order-none w-full flex justify-center md:justify-start mb-6 md:mb-12">
+                        <div id="tab-container" class="inline-flex bg-white p-1.5 rounded-full border border-gray-200 shadow-sm gap-1 overflow-x-auto max-w-full no-scrollbar">
+                            <button onclick="switchTab('redart')" id="btn-redart" class="h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold transition-all duration-300 whitespace-nowrap bg-black text-white shadow-md flex items-center justify-center">
+                                redart
+                            </button>
+                            <button onclick="switchTab('pick')" id="btn-pick" class="h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap flex items-center justify-center">
+                                Pick
+                            </button>
+                            <button onclick="switchTab('tcwallet')" id="btn-tcwallet" class="h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap flex items-center justify-center">
+                                TC Wallet
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Tab Contents Wrapper -->
-                    <div class="order-4 md:order-none h-auto md:min-h-[240px] w-full flex flex-col items-center md:items-start text-center md:text-left mt-0">
-                        <!-- Tab Contents -->
-                        <div id="content-redart" class="text-content block animate-fade-in w-full">
-                            <h3 class="text-[24px] md:text-[30px] font-bold mb-1 text-gray-900">레드아트</h3>
-                            <p class="text-[16px] font-bold mb-1 text-gray-900">작가가 대중이 소통할 수 있는<br>가장 쉬운 아트 & 테크 모바일 플랫폼</p>
-                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">전시 관람 전부터 전시 현장, 관람 후까지<br>작가, 전시, 작품과 소통해 보세요.</p>
+                    <!-- Tab Contents -->
+                    <div class="order-4 md:order-none h-auto min-h-[180px] w-full flex flex-col items-center md:items-start text-center md:text-left mt-0 relative">
+                        <!-- Redart Content -->
+                        <div id="content-redart" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-100 translate-y-0">
+                            <!-- 수정: 모바일에서 앱 이름 숨김 (hidden md:block 추가) -->
+                            <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">레드아트</h3>
+                            <p class="text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">작가가 대중이 소통할 수 있는 가장 쉬운 아트 & 테크 모바일 플랫폼</p>
+                            <!-- 수정: 문장 삭제 -->
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 끊김 없이 소통해 보세요.</p>
                         </div>
-                        <div id="content-pick" class="text-content hidden animate-fade-in w-full">
-                            <h3 class="text-[24px] md:text-[30px] font-bold mb-1 text-gray-900">픽 (Pick)</h3>
-                            <p class="text-[16px] font-bold mb-1 text-gray-900">디지털 자산 포트폴리오,<br>흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
-                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">개인형부터 중앙형까지, 다양한 유형의<br>디지털 자산 포트폴리오를 한 눈에 파악하세요.</p>
+                        <!-- Pick Content -->
+                        <div id="content-pick" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
+                            <!-- 수정: 모바일에서 앱 이름 숨김 (hidden md:block 추가) -->
+                            <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">픽 (Pick)</h3>
+                            <p class="text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">디지털 자산 포트폴리오, 흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">개인형부터 중앙형까지, 다양한 유형의 디지털 자산 포트폴리오를 한 눈에 파악하고 효율적으로 관리하세요.</p>
                         </div>
-                        <div id="content-tcwallet" class="text-content hidden animate-fade-in w-full">
-                            <h3 class="text-[24px] md:text-[30px] font-bold mb-1 text-gray-900">TC Wallet</h3>
-                            <p class="text-[16px] font-bold mb-1 text-gray-900">안전하고 편리한<br>기업용 디지털 자산 관리 솔루션</p>
-                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[360px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안과<br>편의성을 제공하는 월렛 솔루션입니다.</p>
+                        <!-- TC Wallet Content -->
+                        <div id="content-tcwallet" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
+                            <!-- 수정: 모바일에서 앱 이름 숨김 (hidden md:block 추가) -->
+                            <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">TC Wallet</h3>
+                            <p class="text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">안전하고 편리한 기업용 디지털 자산 관리 솔루션</p>
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안(MPC 기술)과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- MOBILE PHONE MOCKUP (Visible only on mobile) -->
-                <div id="business-swipe-area-mobile" class="order-3 md:order-none w-full flex justify-center items-center relative mb-10 md:mb-0 md:hidden touch-pan-y">
-                    <!-- Background Circle Mobile -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] bg-gray-200 rounded-full z-0"></div>
+                <!-- MOBILE PHONE MOCKUP -->
+                <div id="business-swipe-area-mobile" class="order-3 md:order-none w-full flex justify-center items-center relative mb-8 md:mb-0 md:hidden touch-pan-y py-4">
+                    <!-- 수정: 배경 원 크기 w-360 -> w-340 으로 축소 -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
                     
-                    <!-- Phone Mockup Container Mobile -->
-                    <div class="relative w-[194px] h-[390px] z-10 border-0 rounded-[40px] shadow-xl bg-white">
-                        <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/194x390/transparent/transparent';">
-                        <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
-                            <div class="w-full h-full rounded-[20px] overflow-hidden bg-gray-200 relative">
-                                <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart 이미지" class="screen-img-mobile block w-full h-full object-cover animate-fade-in absolute inset-0" onerror="this.onerror=null; this.src='https://placehold.co/164x360/eee/ccc?text=redart';">
-                                <img id="screen-pick-mobile" src="img/phone_02.png" alt="Pick 이미지" class="screen-img-mobile hidden w-full h-full object-cover animate-fade-in absolute inset-0" onerror="this.onerror=null; this.src='https://placehold.co/164x360/eee/ccc?text=Pick';">
-                                <img id="screen-tcwallet-mobile" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img-mobile hidden w-full h-full object-cover animate-fade-in absolute inset-0" onerror="this.onerror=null; this.src='https://placehold.co/164x360/eee/ccc?text=TC+Wallet';">
+                    <!-- 수정: 핸드폰 크기 w-240 -> w-220, h-480 -> h-440 으로 축소 -->
+                    <div class="relative w-[220px] h-[440px] z-10 transform transition-transform hover:scale-105 duration-300">
+                        
+                        <!-- 수정: 모바일 라운드 34px로 변경 -->
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[34px] shadow-2xl z-0"></div>
+
+                        <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/220x440/transparent/transparent';">
+                        
+                        <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
+                            <!-- 수정: 프레임 라운드(34px) - 패딩(12px) = 22px 라운드 적용 -->
+                            <div class="w-full h-full rounded-[22px] overflow-hidden bg-gray-100 relative">
+                                <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=redart+App';">
+                                <img id="screen-pick-mobile" src="img/phone_02.png" alt="Pick" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=Pick+App';">
+                                <img id="screen-tcwallet-mobile" src="img/phone_03.png" alt="TC Wallet" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=TC+Wallet+App';">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- DESKTOP PHONE MOCKUP (Visible only on Desktop) -->
+                <!-- DESKTOP PHONE MOCKUP -->
                 <div id="business-swipe-area-desktop" class="w-full md:w-1/2 justify-center items-center relative hidden md:flex md:-ml-20 md:-translate-x-[30px] touch-pan-y">
-                    <!-- Background Circle Desktop -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] bg-gray-200 rounded-full z-0"></div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
                     
-                    <!-- Phone Mockup Container Desktop -->
-                    <div class="relative w-[310px] h-[624px] z-10 border-0 rounded-[92px] shadow-xl bg-white">
+                    <div class="relative w-[320px] h-[640px] z-10 transform transition-transform hover:scale-105 duration-500">
+                        
+                        <!-- 수정: 웹 라운드값 48px로 변경 -->
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[48px] shadow-2xl z-0"></div>
+
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
-                        <div class="absolute inset-0 w-full h-full z-20 p-[15px]">
-                            <div class="w-full h-full rounded-[28px] overflow-hidden bg-gray-200 relative">
-                                <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart 이미지" class="screen-img-desktop block w-full h-full object-cover animate-fade-in absolute inset-0" onerror="this.onerror=null; this.src='https://placehold.co/280x594/eee/ccc?text=redart';">
-                                <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick 이미지" class="screen-img-desktop hidden w-full h-full object-cover animate-fade-in absolute inset-0" onerror="this.onerror=null; this.src='https://placehold.co/280x594/eee/ccc?text=Pick';">
-                                <img id="screen-tcwallet-desktop" src="img/phone_03.png" alt="TC Wallet 이미지" class="screen-img-desktop hidden w-full h-full object-cover animate-fade-in absolute inset-0" onerror="this.onerror=null; this.src='https://placehold.co/280x594/eee/ccc?text=TC+Wallet';">
+                        
+                        <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
+                            <!-- 수정: 프레임 라운드(48px) - 패딩(18px) = 30px 라운드 적용 -->
+                            <div class="w-full h-full rounded-[30px] overflow-hidden bg-gray-100 relative shadow-inner">
+                                <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=redart+App';">
+                                <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=Pick+App';">
+                                <img id="screen-tcwallet-desktop" src="img/phone_03.png" alt="TC Wallet" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=TC+Wallet+App';">
                             </div>
                         </div>
                     </div>
@@ -301,134 +391,223 @@
     </section>
 
     <!-- PART 04: PRESS Section -->
-    <section id="press" class="snap-start relative min-h-screen bg-white flex items-center w-full py-12 md:py-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full md:pt-5">
-            <h2 class="text-4xl md:text-[44px] font-bold mb-12 text-center md:text-left text-gray-900">PRESS</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="border border-gray-200 p-4 md:p-8 hover:shadow-lg transition-shadow cursor-pointer">
-                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
-                    <h3 class="text-xl font-bold mb-4 line-clamp-2 text-gray-900">"웹3.0 기반 디지털 아트뱅킹 강화 위해 협력" 하나은행-트랙체인 MOU</h3>
-                    <p class="text-gray-400 text-sm">2023. 12. 04</p>
-                </div>
-                <div class="border border-gray-200 p-4 md:p-8 hover:shadow-lg transition-shadow cursor-pointer">
-                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
-                    <h3 class="text-xl font-bold mb-4 line-clamp-2 text-gray-900">트랙체인, NH농협과 NFT 발행</h3>
-                    <p class="text-gray-400 text-sm">2023. 08. 04</p>
-                </div>
-                <div class="border border-gray-200 p-4 md:p-8 hover:shadow-lg transition-shadow cursor-pointer">
-                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
-                    <h3 class="text-xl font-bold mb-4 line-clamp-2 text-gray-900">하나은행, 트랙체인과 웹3.0 기반 디지털 협약</h3>
-                    <p class="text-gray-400 text-sm">2023. 07. 04</p>
-                </div>
-                 <div class="border border-gray-200 p-4 md:p-8 hover:shadow-lg transition-shadow cursor-pointer">
-                    <span class="text-primary text-sm font-bold mb-2 block">언론사</span>
-                    <h3 class="text-xl font-bold mb-4 line-clamp-2 text-gray-900">트랙체인, 미술품 조각투자 플랫폼 기술 지원</h3>
-                    <p class="text-gray-400 text-sm">2023. 06. 04</p>
+    <section id="press" class="snap-start relative min-h-screen bg-white flex items-center w-full py-20 md:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <!-- 수정: 모바일 중앙 정렬을 위한 클래스 변경 (flex-col items-center text-center) -->
+            <div class="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-12 reveal text-center md:text-left">
+                <div class="w-full md:w-auto">
+                    <span class="text-primary font-bold tracking-wider uppercase">Newsroom</span>
+                    <!-- 수정: md:text-[44px] md:leading-[54px] 추가 -->
+                    <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold text-gray-900 mt-2">PRESS</h2>
                 </div>
             </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+                <!-- News Card 1 -->
+                <article class="reveal group cursor-pointer h-full flex flex-col bg-white">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                        <!-- 수정: 이미지 경로 press_01.png 로 변경 -->
+                        <img src="img/press_01.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+1';">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">"웹3.0 기반 디지털 아트뱅킹 강화 위해 협력" 하나은행-트랙체인 MOU 체결</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">하나은행과 트랙체인이 손잡고 미술품 조각투자와 관련된 새로운 금융 상품 개발에 나섭니다.</p>
+                    </div>
+                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 12. 04</span>
+                </article>
 
-            <div class="flex justify-center mt-12 space-x-4">
-                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-gray-400">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <button class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-gray-400">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+                <!-- News Card 2 -->
+                <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.1s;">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                         <!-- 수정: 이미지 경로 press_02.png 로 변경 -->
+                         <img src="img/press_02.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+2';">
+                         <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인, 농협금융 출범 10주년 NFT 발행</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">농업의 가치를 디지털로. 트랙체인이 NH농협과 협력하여 새로운 형태의 멤버십 NFT를 발행합니다.</p>
+                    </div>
+                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 08. 04</span>
+                </article>
+
+                <!-- News Card 3 -->
+                <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.2s;">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                         <!-- 수정: 이미지 경로 press_03.png 로 변경 -->
+                         <img src="img/press_03.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+3';">
+                         <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">INTERVIEW</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인 대표 인터뷰: "Web3의 대중화가 우리의 목표"</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">블록체인 기술이 실생활에 어떻게 적용될 수 있는지, 트랙체인의 비전을 들어봅니다.</p>
+                    </div>
+                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 07. 04</span>
+                </article>
+                
+                 <!-- News Card 4 -->
+                <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.3s;">
+                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                         <!-- 수정: 이미지 경로 press_04.png 로 변경 -->
+                         <img src="img/press_04.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+4';">
+                         <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">TECH</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">미술품 조각투자 플랫폼을 위한 보안 기술 지원</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">안전한 토큰 증권(STO) 생태계를 위해 트랙체인이 보유한 고도화된 월렛 보안 기술을 제공합니다.</p>
+                    </div>
+                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 06. 04</span>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- PART 05: COMBINED PARTNERS + CONTACT US -->
-    <section id="partners-contact-section" class="snap-start relative min-h-screen w-full flex flex-col">
+    <!-- NEW MERGED PART 05: PARTNERS & CONTACT US -->
+    <section id="partners-contact" class="snap-start min-h-screen flex flex-col bg-darkLighter text-white relative">
         
-        <!-- PARTNERS (Top Half) -->
-        <div id="partners" class="flex-1 bg-[#333333] text-white flex items-center py-16 md:py-0">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left w-full">
-                <h2 class="text-4xl md:text-[44px] font-bold mb-[44px]">PARTNERS</h2>
+        <!-- Top Half: Partners (Infinite Scroll) -->
+        <div class="bg-darkLighter flex-shrink-0 py-16 flex flex-col justify-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center reveal w-full">
+                <!-- 수정: md:text-[44px] md:leading-[54px] 추가 -->
+                <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold">Trusted Partners</h2>
+                <p class="text-gray-400 mt-2">다양한 산업의 리더들과 함께 혁신을 만들어갑니다.</p>
+            </div>
+            
+            <div class="relative w-full overflow-hidden py-10 bg-darkLighter">
+                <div class="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-darkLighter to-transparent"></div>
+                <div class="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-darkLighter to-transparent"></div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-x-16 md:gap-y-[4px] opacity-80">
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-                        <img src="img/partners01.png" alt="Partner 1" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
+                <!-- Row 1: Scroll Left -->
+                <div class="flex whitespace-nowrap animate-scroll hover:[animation-play-state:paused] mb-4">
+                    <div class="flex items-center gap-8 md:gap-24 px-4 md:px-12 flex-shrink-0">
+                        <img src="img/partners01.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners02.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners03.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners04.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners05.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners06.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners07.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
                     </div>
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-                        <img src="img/partners02.png" alt="Partner 2" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
+                     <div class="flex items-center gap-8 md:gap-24 px-4 md:px-12 flex-shrink-0">
+                        <img src="img/partners01.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners02.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners03.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners04.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners05.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners06.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners07.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
                     </div>
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-                        <img src="img/partners03.png" alt="Partner 3" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
+                </div>
+
+                <!-- Row 2: Scroll Right (Reverse) -->
+                <div class="flex whitespace-nowrap animate-scroll-reverse hover:[animation-play-state:paused]">
+                    <div class="flex items-center gap-8 md:gap-24 px-4 md:px-12 flex-shrink-0">
+                        <img src="img/partners01.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners02.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners03.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners04.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners05.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners06.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners07.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
                     </div>
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-                        <img src="img/partners04.png" alt="Partner 4" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
-                    </div>
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-                        <img src="img/partners05.png" alt="Partner 5" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
-                    </div>
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-                        <img src="img/partners06.png" alt="Partner 6" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
-                    </div>
-                    <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all col-span-2 md:col-span-1">
-                        <img src="img/partners07.png" alt="Partner 7" class="h-[72px] w-auto md:w-[273px] md:h-[100px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/273x100/444/999?text=Partner';">
+                     <div class="flex items-center gap-8 md:gap-24 px-4 md:px-12 flex-shrink-0">
+                        <img src="img/partners01.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners02.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners03.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners04.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners05.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners06.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
+                        <img src="img/partners07.png" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CONTACT US (Bottom Half) -->
-        <div id="contact" class="flex-1 bg-primary text-white flex items-center relative py-16 md:py-0">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div class="flex flex-col md:flex-row items-center md:items-start justify-between">
-                    <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                        <h2 class="text-4xl md:text-[44px] font-bold mb-4">CONTACT US</h2>
-                        <p class="text-white/90 text-lg">트랙체인과 함께하고 싶거나<br>궁금한 점이 있으시다면 메일을 보내주세요.</p>
-                    </div>
-                    
-                    <div class="w-full md:w-1/2 bg-transparent">
-                        <form class="space-y-4">
-                            <div class="relative">
-                                <select class="w-full p-4 pr-10 bg-white text-gray-900 rounded-lg appearance-none focus:outline-none cursor-pointer border border-gray-200">
-                                    <option>문의유형</option>
-                                    <option>제휴 문의</option>
-                                    <option>채용 문의</option>
-                                    <option>기타</option>
-                                </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-600">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                            
-                            <input type="email" placeholder="example@trackchaincorp.com" class="w-full p-4 bg-white text-gray-900 rounded-lg focus:outline-none placeholder-gray-400 border border-gray-200">
-                            
-                            <!-- Updated hover color to bg-primary -->
-                            <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full p-4 bg-black text-white font-bold rounded-lg hover:bg-primary transition-colors">
-                                보내기
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <!-- Bottom Half: Contact Us (Fills remaining space) -->
+        <div class="flex-1 bg-dark text-white relative flex items-center py-16 overflow-hidden">
+             <!-- Decor -->
+             <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
+                 <div class="flex flex-col md:flex-row gap-16 items-center">
+                     <!-- Text -->
+                     <div class="md:w-1/2 reveal text-center md:text-left">
+                         <!-- 수정: md:text-[44px] md:leading-[54px] 추가 -->
+                         <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold mb-6">CONTACT US</h2>
+                         <p class="text-[16px] leading-[26px] text-gray-400 mb-8 break-keep">
+                             트랙체인과 함께 Web3 비즈니스를<br>성공적으로 이끌어갈 파트너를 기다립니다.
+                         </p>
+                         <div class="space-y-3">
+                             <!-- 수정: justify-start 로 원복 (좌측 정렬) -->
+                             <div class="flex items-center justify-start text-gray-300 text-[14px] leading-[24px]">
+                                 <i class="fas fa-envelope w-6 text-primary text-center mr-2"></i>
+                                 <span>contact@trackchain.corp</span>
+                             </div>
+                             <div class="flex items-center justify-start text-gray-300 text-[14px] leading-[24px]">
+                                 <i class="fas fa-phone w-6 text-primary text-center mr-2"></i>
+                                 <span>02-1234-5678</span>
+                             </div>
+                             <div class="flex items-center justify-start text-gray-300 text-[14px] leading-[24px]">
+                                 <i class="fas fa-map-marker-alt w-6 text-primary text-center mr-2"></i>
+                                 <span>서울시 영등포구 여의대로 108 파크원 타워1 26층</span>
+                             </div>
+                         </div>
+                     </div>
+
+                     <!-- Form -->
+                     <div class="md:w-1/2 w-full bg-white/5 backdrop-blur-lg p-8 rounded-3xl border border-white/10 reveal" style="transition-delay: 0.2s;">
+                         <form class="space-y-6">
+                              <div class="relative">
+                                 <select class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                                     <option>문의유형 선택</option>
+                                     <option>제휴 문의</option>
+                                     <option>채용 문의</option>
+                                     <option>기타</option>
+                                 </select>
+                                 <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+                                     <i class="fas fa-chevron-down text-xs"></i>
+                                 </div>
+                             </div>
+                             <div>
+                                 <input type="email" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="이메일 주소">
+                             </div>
+                             <div>
+                                 <textarea rows="4" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none" placeholder="문의 내용"></textarea>
+                             </div>
+                             <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full py-4 bg-primary hover:bg-primaryHover text-white font-bold rounded-lg transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/30">
+                                 보내기
+                             </button>
+                         </form>
+                     </div>
+                 </div>
+             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="snap-start w-full bg-black text-gray-400 py-[72px] border-t border-gray-900">
+    <footer class="snap-start w-full bg-black text-gray-400 py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end">
-                <div class="mb-8 md:mb-0">
-                    <div class="mb-4 flex justify-start">
-                        <img src="img/img_logo_footer.png" alt="TRACKCHAIN" class="h-[48px] w-auto object-contain object-left" onerror="this.onerror=null; this.src='https://placehold.co/120x48/black/white?text=LOGO';">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+                <div>
+                    <div class="mb-6 flex justify-start">
+                         <img src="img/img_logo_footer.png" alt="TRACKCHAIN" class="h-[48px] w-auto object-contain object-left" onerror="this.onerror=null; this.src='https://placehold.co/120x48/black/white?text=LOGO';">
                     </div>
-                    <div class="space-x-4 mb-4">
-                        <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-google-play fa-lg"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-app-store-ios fa-lg"></i></a>
-                    </div>
-                    <div class="text-xs space-y-1">
+                    <div class="text-sm space-y-2 text-gray-500">
                         <p>서울시 영등포구 여의대로 108 파크원 타워1 26층</p>
                         <p>대표: 홍길동 | 사업자등록번호: 000-00-00000</p>
+                        <p class="pt-2">Copyright &copy; 2024 TRACKCHAIN Corp. All rights reserved.</p>
                     </div>
                 </div>
-                <div class="text-xs">
-                    &copy; 2024 트랙체인 All rights reserved.
+                <div class="flex flex-col items-start md:items-end gap-4">
+                     <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-google-play fa-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-app-store-ios fa-lg"></i></a>
+                    </div>
+                    <div class="flex gap-4 text-xs font-medium text-gray-500">
+                        <a href="#" class="hover:text-white transition-colors">이용약관</a>
+                        <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -439,81 +618,114 @@
         let lastScrollTop = 0;
         const navbar = document.getElementById('navbar');
 
-        // Scroll Logic: Hide navbar on down, show on up
+        // Scroll Logic & Scroll Spy
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
+            // Navbar Hide/Show Logic
             if (scrollTop > 80) {
                 if (scrollTop > lastScrollTop) {
                     navbar.style.transform = 'translateY(-100%)';
                 } else {
                     navbar.style.transform = 'translateY(0)';
+                    navbar.classList.add('bg-black/95', 'shadow-lg');
                 }
             } else {
                 navbar.style.transform = 'translateY(0)';
+                if(scrollTop < 20) navbar.classList.remove('shadow-lg');
             }
-            
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+            // --- Scroll Spy Logic (Enhanced) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let current = '';
+
+            const scrollPosition = window.scrollY + (window.innerHeight / 2);
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === current) {
+                    link.classList.add('active');
+                }
+            });
         });
 
-        // Tab Logic
+        // Tab Logic (Updated for Capsule Style)
         function switchTab(tabId) {
             currentTabId = tabId;
             const tabs = ['redart', 'pick', 'tcwallet'];
-            const indicator = document.getElementById('tab-indicator');
-            const tabContainer = document.getElementById('tab-container');
             
+            // 1. Update Buttons Style - Including Mobile Response Classes
             tabs.forEach(t => {
-                const textSpan = document.getElementById(`text-${t}`);
-                const content = document.getElementById(`content-${t}`);
-                
+                const btn = document.getElementById(`btn-${t}`);
                 if (t === tabId) {
-                    textSpan.classList.remove('text-gray-400');
-                    textSpan.classList.add('text-gray-900');
-                    content.classList.remove('hidden');
-                    content.classList.add('block');
-                    
-                    if(indicator && textSpan && tabContainer) {
-                        const textRect = textSpan.getBoundingClientRect();
-                        const containerRect = tabContainer.getBoundingClientRect();
-                        const relativeLeft = textRect.left - containerRect.left + tabContainer.scrollLeft;
-                        indicator.style.width = `${textRect.width}px`;
-                        indicator.style.left = `${relativeLeft}px`;
+                    // Active Style: h-[44px]
+                    btn.className = "h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold transition-all duration-300 whitespace-nowrap bg-black text-white shadow-md transform scale-105 flex items-center justify-center";
+                } else {
+                    // Inactive Style: h-[44px]
+                    btn.className = "h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap flex items-center justify-center";
+                }
+            });
+
+            // 2. Handle Content (Fade/Translate Effect)
+            tabs.forEach(t => {
+                const content = document.getElementById(`content-${t}`);
+                if (t === tabId) {
+                    content.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    content.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    content.classList.remove('opacity-100', 'translate-y-0');
+                    content.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }
+            });
+
+            // 3. Handle Images (Fade Effect) - same as before
+            const handleImages = (selectorSuffix) => {
+                const images = document.querySelectorAll(`.screen-img-${selectorSuffix}`);
+                images.forEach(img => {
+                    const imgId = img.id.replace(`-mobile`, '').replace(`-desktop`, '').replace('screen-', '');
+                    if (imgId === tabId) {
+                        img.classList.remove('opacity-0');
+                        img.classList.add('opacity-100');
+                    } else {
+                        img.classList.remove('opacity-100');
+                        img.classList.add('opacity-0');
                     }
-                } else {
-                    textSpan.classList.add('text-gray-400');
-                    textSpan.classList.remove('text-gray-900');
-                    content.classList.add('hidden');
-                    content.classList.remove('block');
-                }
-            });
-
-            const imagesMobile = document.querySelectorAll('.screen-img-mobile');
-            imagesMobile.forEach(img => {
-                const imgId = img.id.replace('-mobile', '').replace('screen-', '');
-                if (imgId === tabId) {
-                    img.classList.remove('hidden');
-                    img.classList.add('block');
-                } else {
-                    img.classList.add('hidden');
-                    img.classList.remove('block');
-                }
-            });
-
-            const imagesDesktop = document.querySelectorAll('.screen-img-desktop');
-            imagesDesktop.forEach(img => {
-                const imgId = img.id.replace('-desktop', '').replace('screen-', '');
-                if (imgId === tabId) {
-                    img.classList.remove('hidden');
-                    img.classList.add('block');
-                } else {
-                    img.classList.add('hidden');
-                    img.classList.remove('block');
-                }
-            });
+                });
+            };
+            handleImages('mobile');
+            handleImages('desktop');
         }
 
-        // Swipe Logic (Unified function for both areas)
+        // --- Reveal Animation Observer ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Mobile Swipe Logic (Existing)
         const swipeAreaMobile = document.getElementById('business-swipe-area-mobile');
         const swipeAreaDesktop = document.getElementById('business-swipe-area-desktop');
         
@@ -522,7 +734,6 @@
 
         function addSwipeListener(element) {
             if (!element) return;
-            
             element.addEventListener('touchstart', e => {
                 touchStartX = e.changedTouches[0].screenX;
             }, {passive: true});
@@ -541,12 +752,10 @@
             const currentIndex = tabs.indexOf(currentTabId);
             const minSwipeDistance = 50;
 
-            if (touchEndX < touchStartX - minSwipeDistance) {
-                // Swiped Left (Next Tab)
+            if (touchEndX < touchStartX - minSwipeDistance) { // Swipe Left (Next)
                 const nextIndex = (currentIndex + 1) % tabs.length;
                 switchTab(tabs[nextIndex]);
-            } else if (touchEndX > touchStartX + minSwipeDistance) {
-                // Swiped Right (Prev Tab)
+            } else if (touchEndX > touchStartX + minSwipeDistance) { // Swipe Right (Prev)
                 const prevIndex = (currentIndex - 1 + tabs.length) % tabs.length;
                 switchTab(tabs[prevIndex]);
             }
@@ -574,49 +783,8 @@
         }
 
         function handleMobileClick(el) {
-            const items = document.querySelectorAll('.mobile-menu-item');
-            items.forEach(item => {
-                item.classList.remove('text-[#FF6D2B]', 'font-bold');
-                item.classList.add('text-white', 'font-medium');
-            });
-            el.classList.remove('text-white', 'font-medium');
-            el.classList.add('text-[#FF6D2B]', 'font-bold');
             toggleMenu();
         }
-        
-        // Scroll Spy & Navbar Logic
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-lg');
-            }
-
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            let current = '';
-
-            // Using standard scroll spy logic, adjusted for full page sections
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= (sectionTop - window.innerHeight / 3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-                current = 'partners-contact-section';
-            }
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-target') === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
     </script>
 </body>
 </html>
