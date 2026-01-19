@@ -393,7 +393,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 mb-12">
                 <!-- News Card 1 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-xl -> rounded-2xl 로 변경 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                         <img src="img/press_01.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+1';">
                         <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
                     </div>
@@ -406,7 +407,8 @@
 
                 <!-- News Card 2 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.1s;">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-xl -> rounded-2xl 로 변경 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="img/press_02.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+2';">
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
                     </div>
@@ -419,7 +421,8 @@
 
                 <!-- News Card 3 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.2s;">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-xl -> rounded-2xl 로 변경 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="img/press_03.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+3';">
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">INTERVIEW</div>
                     </div>
@@ -432,7 +435,8 @@
                 
                  <!-- News Card 4 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.3s;">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-xl -> rounded-2xl 로 변경 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="img/press_04.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+4';">
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">TECH</div>
                     </div>
@@ -549,7 +553,8 @@
                      <div class="md:w-1/2 w-full bg-white/5 backdrop-blur-lg p-8 rounded-3xl border border-white/10 reveal" style="transition-delay: 0.2s;">
                          <form class="space-y-6">
                               <div class="relative">
-                                 <select class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                                 <!-- 수정: rounded-lg -> rounded-xl 로 변경 -->
+                                 <select class="w-full bg-darkLighter border border-gray-700 rounded-xl p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
                                      <option>문의유형 선택</option>
                                      <option>제휴 문의</option>
                                      <option>채용 문의</option>
@@ -560,10 +565,12 @@
                                  </div>
                              </div>
                              <div>
-                                 <input type="email" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="이메일 주소">
+                                 <!-- 수정: rounded-lg -> rounded-xl 로 변경 -->
+                                 <input type="email" class="w-full bg-darkLighter border border-gray-700 rounded-xl p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="이메일 주소">
                              </div>
                              <div>
-                                 <textarea rows="4" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none" placeholder="문의 내용"></textarea>
+                                 <!-- 수정: rounded-lg -> rounded-xl 로 변경 -->
+                                 <textarea rows="4" class="w-full bg-darkLighter border border-gray-700 rounded-xl p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none" placeholder="문의 내용"></textarea>
                              </div>
                              <!-- 수정: rounded-lg -> rounded-full 변경 -->
                              <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full py-4 bg-primary hover:bg-primaryHover text-white font-bold rounded-full transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/30">
