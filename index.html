@@ -137,26 +137,27 @@
                     <div class="ml-10 flex items-center space-x-8">
                         <a href="#main" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="main">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">MAIN</span>
+                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">MAIN</span>
                         </a>
                         <a href="#value" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="value">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">VALUE & VISION</span>
+                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">VALUE & VISION</span>
                         </a>
                         <a href="#business" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="business">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">BUSINESS</span>
+                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">BUSINESS</span>
                         </a>
                         <a href="#press" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="press">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">PRESS</span>
+                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">PRESS</span>
                         </a>
                         <a href="#partners-contact" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="partners-contact">
                             <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
-                            <span class="text-[15px] font-medium text-gray-400 group-hover:text-white transition-colors">PARTNERS</span>
+                            <!-- 수정: text-[15px] -> text-[16px] -->
+                            <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">PARTNERS</span>
                         </a>
 
-                        <!-- 수정: 그림자 강도 약하게 조절 (shadow-lg -> shadow-md, primary/30 -> primary/20) -->
+                        <!-- 수정: 그림자 효과 완화 (shadow-lg -> shadow-md, opacity 30 -> 20) -->
                         <a href="#partners-contact" class="h-[44px] px-6 flex items-center justify-center bg-primary hover:bg-primaryHover text-white text-sm font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-md shadow-primary/20 ml-4">
                             CONTACT US
                         </a>
@@ -216,11 +217,11 @@
                 </p>
                 
                 <div class="mt-10 flex gap-4">
-                    <!-- 수정: 그림자 효과(shadow-lg, hover:shadow-...) 삭제 -->
-                    <a href="#business" class="w-[144px] text-center px-4 py-3 bg-primary text-white font-bold rounded-full hover:bg-orange-600 transition-colors">
+                    <!-- 수정: 호버시 그림자 효과(hover:shadow-orange-500/30) 삭제 -->
+                    <a href="#business" class="w-[144px] h-[56px] flex items-center justify-center px-4 bg-primary text-white font-bold rounded-full hover:bg-orange-600 transition-colors shadow-lg">
                         서비스 소개
                     </a>
-                    <a href="#partners-contact" class="w-[144px] text-center px-4 py-3 border border-white/30 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/10 transition-colors">
+                    <a href="#partners-contact" class="w-[144px] h-[56px] flex items-center justify-center px-4 border border-white/30 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/10 transition-colors">
                         문의하기
                     </a>
                 </div>
@@ -243,13 +244,13 @@
                 <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left md:sticky md:top-32">
                     <span class="text-primary font-bold tracking-widest text-[16px] leading-[26px] mb-2 block">OUR MISSION</span>
                     <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold text-gray-900">VALUE & VISION</h2>
-                    <p class="mt-6 text-gray-500 leading-relaxed break-keep max-w-md mx-auto md:mx-0">
+                    <p class="mt-6 text-[16px] md:text-[18px] text-gray-500 leading-relaxed break-keep max-w-md mx-auto md:mx-0">
                         트랙체인은 기술을 통해 새로운 금융의 미래를 그려갑니다.
                     </p>
                 </div>
                 
-                <div class="md:w-2/3 space-y-6 md:pl-[80px]">
-                    <!-- Item 1: Reveal Animation Added -->
+                <div class="md:w-auto flex-1 space-y-6 md:pl-[80px] flex flex-col md:items-end">
+                    <!-- Item 1: 라운드 rounded-2xl 유지 -->
                     <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]">
                         <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                             <div class="flex-shrink-0 transition-colors">
@@ -257,12 +258,14 @@
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">WEB3 여정의 파트너</h3>
-                                <p class="text-gray-600 leading-relaxed break-keep">우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만들며, 복잡한 기술을 직관적인 경험으로 바꿉니다.</p>
+                                <p class="text-[16px] text-gray-600 leading-relaxed break-keep">
+                                    우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만들며, 복잡한 기술을 직관적인 경험으로 바꿉니다.
+                                </p>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Item 2: Reveal Animation Added (delay 0.1s) -->
+                    <!-- Item 2: 라운드 rounded-2xl 유지 -->
                     <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]" style="transition-delay: 0.1s;">
                         <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                             <div class="flex-shrink-0 transition-colors">
@@ -270,12 +273,12 @@
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">시대 흐름에 맞춘 WEB3 기술 활용</h3>
-                                <p class="text-gray-600 leading-relaxed break-keep">아트 특화 플랫폼 "redart"는 블록체인, NFT 등 Web3 기술 접목으로 아트 시장의 디지털 전환을 돕습니다.</p>
+                                <p class="text-[16px] text-gray-600 leading-relaxed break-keep">아트 특화 플랫폼 "redart"는 블록체인, NFT 등 Web3 기술 접목으로 아트 시장의 디지털 전환을 돕습니다.</p>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Item 3: Reveal Animation Added (delay 0.2s) -->
+                    <!-- Item 3: 라운드 rounded-2xl 유지 -->
                     <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]" style="transition-delay: 0.2s;">
                         <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                             <div class="flex-shrink-0 transition-colors">
@@ -283,7 +286,7 @@
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">WEB3 금융·보안 솔루션 제공</h3>
-                                <p class="text-gray-600 leading-relaxed break-keep">전통 금융과 디지털 자산 월렛(중앙형, 개인형)부터 DeFi까지, 강력한 보안 기술을 바탕으로 디지털 금융의 대중화에 기여합니다.</p>
+                                <p class="text-[16px] text-gray-600 leading-relaxed break-keep">전통 금융과 디지털 자산 월렛(중앙형, 개인형)부터 DeFi까지, 강력한 보안 기술을 바탕으로 디지털 금융의 대중화에 기여합니다.</p>
                             </div>
                         </div>
                     </div>
@@ -322,19 +325,19 @@
                         <!-- Redart Content -->
                         <div id="content-redart" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-100 translate-y-0">
                             <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">레드아트</h3>
-                            <p class="text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">작가가 대중이 소통할 수 있는 가장 쉬운 아트 & 테크 모바일 플랫폼</p>
+                            <p class="text-[16px] md:text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">작가가 대중이 소통할 수 있는 가장 쉬운 아트 & 테크 모바일 플랫폼</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">전시 관람 전부터 전시 현장, 관람 후까지 작가, 전시, 작품과 끊김 없이 소통해 보세요.</p>
                         </div>
                         <!-- Pick Content -->
                         <div id="content-pick" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
                             <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">픽 (Pick)</h3>
-                            <p class="text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">디지털 자산 포트폴리오, 흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
+                            <p class="text-[16px] md:text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">디지털 자산 포트폴리오, 흩어져 있는 자산을 한 눈에 통합 조회·관리</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">개인형부터 중앙형까지, 다양한 유형의 디지털 자산 포트폴리오를 한 눈에 파악하고 효율적으로 관리하세요.</p>
                         </div>
                         <!-- TC Wallet Content -->
                         <div id="content-tcwallet" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
                             <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">TC Wallet</h3>
-                            <p class="text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">안전하고 편리한 기업용 디지털 자산 관리 솔루션</p>
+                            <p class="text-[16px] md:text-[18px] font-bold mb-4 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">안전하고 편리한 기업용 디지털 자산 관리 솔루션</p>
                             <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안(MPC 기술)과 편의성을 제공하는 엔터프라이즈 월렛 솔루션입니다.</p>
                         </div>
                     </div>
@@ -345,13 +348,11 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
                     
                     <div class="relative w-[220px] h-[440px] z-10 transform transition-transform hover:scale-105 duration-300">
-                        
-                        <!-- 모바일 라운드 38px -->
+                        <!-- 모바일 목업 라운드 원복 -->
                         <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[38px] shadow-2xl z-0"></div>
-
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/220x440/transparent/transparent';">
-                        
                         <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
+                            <!-- 모바일 화면 라운드 원복 -->
                             <div class="w-full h-full rounded-[26px] overflow-hidden bg-gray-100 relative">
                                 <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-mobile" src="img/phone_02.png" alt="Pick" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=Pick+App';">
@@ -366,13 +367,11 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
                     
                     <div class="relative w-[320px] h-[640px] z-10 transform transition-transform hover:scale-105 duration-500">
-                        
-                        <!-- 웹 라운드 48px -->
+                        <!-- 데스크탑 목업 라운드 원복 -->
                         <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[48px] shadow-2xl z-0"></div>
-
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
-                        
                         <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
+                            <!-- 데스크탑 화면 라운드 원복 -->
                             <div class="w-full h-full rounded-[30px] overflow-hidden bg-gray-100 relative shadow-inner">
                                 <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=redart+App';">
                                 <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=Pick+App';">
@@ -395,58 +394,82 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 mb-12">
                 <!-- News Card 1 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-2xl 유지 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                         <img src="img/press_01.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+1';">
                         <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">"웹3.0 기반 디지털 아트뱅킹 강화 위해 협력" 하나은행-트랙체인 MOU 체결</h3>
-                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">하나은행과 트랙체인이 손잡고 미술품 조각투자와 관련된 새로운 금융 상품 개발에 나섭니다.</p>
+                        <!-- 수정: text-lg(18px) -> text-[20px] -->
+                        <h3 class="text-[20px] font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">"웹3.0 기반 디지털 아트뱅킹 강화 위해 협력" 하나은행-트랙체인 MOU 체결</h3>
+                        <!-- 수정: 16px (요청 반영) -->
+                        <p class="text-gray-500 text-[16px] mb-4 line-clamp-2">하나은행과 트랙체인이 손잡고 미술품 조각투자와 관련된 새로운 금융 상품 개발에 나섭니다.</p>
                     </div>
-                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 12. 04</span>
+                    <!-- 수정: 16px (요청 반영) -->
+                    <span class="text-[16px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 12. 04</span>
                 </article>
 
                 <!-- News Card 2 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.1s;">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-2xl 유지 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="img/press_02.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+2';">
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">NEWS</div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인, 농협금융 출범 10주년 NFT 발행</h3>
-                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">농업의 가치를 디지털로. 트랙체인이 NH농협과 협력하여 새로운 형태의 멤버십 NFT를 발행합니다.</p>
+                        <!-- 수정: text-lg(18px) -> text-[20px] -->
+                        <h3 class="text-[20px] font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인, 농협금융 출범 10주년 NFT 발행</h3>
+                        <!-- 수정: 16px (요청 반영) -->
+                        <p class="text-gray-500 text-[16px] mb-4 line-clamp-2">농업의 가치를 디지털로. 트랙체인이 NH농협과 협력하여 새로운 형태의 멤버십 NFT를 발행합니다.</p>
                     </div>
-                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 08. 04</span>
+                    <!-- 수정: 16px (요청 반영) -->
+                    <span class="text-[16px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 08. 04</span>
                 </article>
 
                 <!-- News Card 3 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.2s;">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-2xl 유지 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="img/press_03.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+3';">
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">INTERVIEW</div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인 대표 인터뷰: "Web3의 대중화가 우리의 목표"</h3>
-                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">블록체인 기술이 실생활에 어떻게 적용될 수 있는지, 트랙체인의 비전을 들어봅니다.</p>
+                        <!-- 수정: text-lg(18px) -> text-[20px] -->
+                        <h3 class="text-[20px] font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인 대표 인터뷰: "Web3의 대중화가 우리의 목표"</h3>
+                        <!-- 수정: 16px (요청 반영) -->
+                        <p class="text-gray-500 text-[16px] mb-4 line-clamp-2">블록체인 기술이 실생활에 어떻게 적용될 수 있는지, 트랙체인의 비전을 들어봅니다.</p>
                     </div>
-                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 07. 04</span>
+                    <!-- 수정: 16px (요청 반영) -->
+                    <span class="text-[16px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 07. 04</span>
                 </article>
                 
                  <!-- News Card 4 -->
                 <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: 0.3s;">
-                    <div class="overflow-hidden rounded-xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                    <!-- 수정: rounded-2xl 유지 -->
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
                          <img src="img/press_04.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News+4';">
                          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">TECH</div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인, 미술품 조각투자 플랫폼 기술 지원</h3>
-                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">안전한 토큰 증권(STO) 생태계를 위해 트랙체인이 보유한 고도화된 월렛 보안 기술을 제공합니다.</p>
+                        <!-- 수정: text-lg(18px) -> text-[20px] -->
+                        <h3 class="text-[20px] font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">트랙체인, 미술품 조각투자 플랫폼 기술 지원</h3>
+                        <!-- 수정: 16px (요청 반영) -->
+                        <p class="text-gray-500 text-[16px] mb-4 line-clamp-2">안전한 토큰 증권(STO) 생태계를 위해 트랙체인이 보유한 고도화된 월렛 보안 기술을 제공합니다.</p>
                     </div>
-                    <span class="text-[14px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 06. 04</span>
+                    <!-- 수정: 16px (요청 반영) -->
+                    <span class="text-[16px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">2023. 06. 04</span>
                 </article>
+            </div>
+
+            <!-- New Button Location & Style: Centered Bottom -->
+            <div class="text-center reveal">
+                <a href="#" class="inline-flex items-center justify-center h-[56px] px-10 rounded-full border border-gray-300 text-gray-600 font-bold hover:bg-black hover:text-white hover:border-black transition-all duration-300 group">
+                    <span class="text-[16px]">기사 전체 보기</span>
+                    <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -458,7 +481,8 @@
         <div class="bg-darkLighter flex-shrink-0 py-16 flex flex-col justify-center">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center reveal w-full">
                 <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold">PARTNERS</h2>
-                <p class="text-gray-400 mt-2">다양한 산업의 리더들과 함께 혁신을 만들어갑니다.</p>
+                <!-- 수정: 18px (요청 반영) -->
+                <p class="text-gray-400 mt-2 text-[18px]">다양한 산업의 리더들과 함께 혁신을 만들어갑니다.</p>
             </div>
             
             <div class="relative w-full overflow-hidden py-10 bg-darkLighter">
@@ -522,20 +546,21 @@
                      <div class="md:w-1/2 reveal text-center md:text-left">
                          <!-- 수정: md:text-[44px] md:leading-[54px] 추가 -->
                          <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold mb-6">CONTACT US</h2>
-                         <p class="text-[16px] leading-[26px] text-gray-400 mb-8 break-keep">
+                         <!-- 수정: 16px(기본), 데스크탑 18px (위계 1단계 - 섹션 도입부) -->
+                         <p class="text-[16px] md:text-[18px] leading-[26px] text-gray-400 mb-8 break-keep">
                              트랙체인과 함께 Web3 비즈니스를<br>성공적으로 이끌어갈 파트너를 기다립니다.
                          </p>
                          <div class="space-y-3">
-                             <!-- 수정: justify-start 로 원복 (좌측 정렬) -->
-                             <div class="flex items-center justify-start text-gray-300 text-[14px] leading-[24px]">
+                             <!-- 수정: 16px (요청 반영) -->
+                             <div class="flex items-center justify-start text-gray-300 text-[16px] leading-[24px]">
                                  <i class="fas fa-envelope w-6 text-primary text-center mr-2"></i>
                                  <span>contact@trackchain.corp</span>
                              </div>
-                             <div class="flex items-center justify-start text-gray-300 text-[14px] leading-[24px]">
+                             <div class="flex items-center justify-start text-gray-300 text-[16px] leading-[24px]">
                                  <i class="fas fa-phone w-6 text-primary text-center mr-2"></i>
                                  <span>02-1234-5678</span>
                              </div>
-                             <div class="flex items-center justify-start text-gray-300 text-[14px] leading-[24px]">
+                             <div class="flex items-center justify-start text-gray-300 text-[16px] leading-[24px]">
                                  <i class="fas fa-map-marker-alt w-6 text-primary text-center mr-2"></i>
                                  <span>서울시 영등포구 여의대로 108 파크원 타워1 26층</span>
                              </div>
@@ -543,9 +568,10 @@
                      </div>
 
                      <!-- Form -->
-                     <div class="md:w-1/2 w-full bg-white/5 backdrop-blur-lg p-8 rounded-3xl border border-white/10 reveal" style="transition-delay: 0.2s;">
-                         <form class="space-y-6">
+                     <div class="md:w-1/2 w-full bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 reveal" style="transition-delay: 0.2s;">
+                         <form class="space-y-4">
                               <div class="relative">
+                                 <!-- 수정: rounded-lg 로 변경 -->
                                  <select class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
                                      <option>문의유형 선택</option>
                                      <option>제휴 문의</option>
@@ -557,13 +583,15 @@
                                  </div>
                              </div>
                              <div>
+                                 <!-- 수정: rounded-lg 로 변경 -->
                                  <input type="email" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="이메일 주소">
                              </div>
                              <div>
+                                 <!-- 수정: rounded-lg 로 변경 -->
                                  <textarea rows="4" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none" placeholder="문의 내용"></textarea>
                              </div>
-                             <!-- 수정: 그림자 강도 약하게 조절 (shadow-lg -> shadow-md, primary/30 -> primary/20) -->
-                             <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full py-4 bg-primary hover:bg-primaryHover text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-md shadow-primary/20">
+                             <!-- 수정: rounded-lg -> rounded-full 변경, 효과 통일(hover:scale-105), 그림자 완화 -->
+                             <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full py-4 bg-primary hover:bg-primaryHover text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md shadow-primary/20">
                                  보내기
                              </button>
                          </form>
@@ -583,6 +611,7 @@
                     </div>
                     <div class="text-sm space-y-2 text-gray-500">
                         <p>서울시 영등포구 여의대로 108 파크원 타워1 26층</p>
+                        <!-- 수정: 대표자 이름 삭제, 사업자번호 변경 -->
                         <p>사업자등록번호: 383-86-02358</p>
                         <p class="pt-2">Copyright &copy; 2024 TRACKCHAIN Corp. All rights reserved.</p>
                     </div>
