@@ -337,9 +337,10 @@
                         <!-- TC Wallet Content -->
                         <div id="content-tcwallet" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
                             <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">TC Wallet</h3>
-                            <!-- 수정: mb-4 -> mb-2 (간격 8px로 축소) -->
-                            <p class="text-[18px] font-bold mb-2 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">안전하고 편리한 기업용 디지털 자산 관리 솔루션</p>
-                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안<br>(MPC 기술)과 편의성을 제공하는 <br>엔터프라이즈 월렛 솔루션입니다.</p>
+                            <!-- 수정: 줄바꿈 위치 변경 ('디지털' 뒤에 <br> 추가) -->
+                            <p class="text-[18px] font-bold mb-2 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">안전하고 편리한 기업용 디지털 <br>자산 관리 솔루션</p>
+                            <!-- 수정: 텍스트 수정 (엔터프라이즈 월렛 솔루션입니다 삭제 및 문구 간소화) -->
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안<br>(MPC 기술)과 편의성을 제공합니다.</p>
                         </div>
                     </div>
                 </div>
@@ -350,8 +351,8 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
                     
                     <div class="relative w-[220px] h-[440px] z-10 transform transition-transform hover:scale-105 duration-300">
-                        <!-- 모바일 목업 라운드 원복 -->
-                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[38px] shadow-2xl z-0"></div>
+                        <!-- 모바일 목업 라운드 원복, 그림자 강도 조절 (shadow-2xl -> shadow-xl) -->
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[38px] shadow-xl z-0"></div>
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/220x440/transparent/transparent';">
                         <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
                             <!-- 모바일 화면 라운드 원복 -->
@@ -369,8 +370,8 @@
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
                     
                     <div class="relative w-[320px] h-[640px] z-10 transform transition-transform hover:scale-105 duration-500">
-                        <!-- 데스크탑 목업 라운드 원복 -->
-                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[48px] shadow-2xl z-0"></div>
+                        <!-- 데스크탑 목업 라운드 원복, 그림자 강도 조절 (shadow-2xl -> shadow-xl) -->
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[48px] shadow-xl z-0"></div>
                         <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
                         <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
                             <!-- 데스크탑 화면 라운드 원복 -->
