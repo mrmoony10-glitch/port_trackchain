@@ -3,7 +3,6 @@
  For portfolio optimization, it has been refactored into a Data-Driven Rendering structure (Vanilla JS) 
  to maintain the component logic without the overhead of the full React library. 
  (Structure: Data Arrays -> Rendering Functions -> DOM Implementation) -->
-
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
 <head>
@@ -20,17 +19,16 @@
             theme: {
                 extend: {
                     colors: {
-                        // 1. Primitives (Palettes)
+                        
                         palette: {
                             orange: { DEFAULT: '#FF6D2B', dark: '#E55A1B' },
                             gray: { 900: '#111111', 600: '#4B5563', 400: '#9CA3AF', 200: '#E5E7EB', 50: '#F9FAFB' },
                             black: '#000000',
                             white: '#FFFFFF'
                         },
-                        // [복구 완료] PARTNERS 배경색용 컬러 정의
+
                         darkLighter: '#1A1A1A', 
                         
-                        // 2. Semantics (Tokens)
                         action: {
                             DEFAULT: '#FF6D2B', // button-primary
                             hover: '#E55A1B',   // button-hover
