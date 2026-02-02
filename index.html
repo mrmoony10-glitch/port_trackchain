@@ -1,1155 +1,537 @@
 <!DOCTYPE html>
-<html lang="ko" class="dark">
+<html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI RoboAdvisor Dashboard</title>
-    
+    <title>TRACKCHAIN - 혁신적인 금융과 기술의 접목</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+
     <script>
+        // 디자인 토큰 설정 (기존 유지)
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        slate: {
-                            850: '#1f2937', 
-                        }
+                        primary: '#FF6D2B',
+                        primaryHover: '#E55A1B',
+                        dark: '#111111',
+                        darkLighter: '#1A1A1A',
+                        light: '#F8F9FA',
+                        gray: { 900: '#111111', 600: '#4B5563', 400: '#9CA3AF', 200: '#E5E7EB', 50: '#F9FAFB' }
                     },
-                    fontFamily: {
-                        sans: ['Pretendard', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+                    fontFamily: { sans: ['Pretendard', 'sans-serif'] },
+                    boxShadow: {
+                        'card': '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+                        'mockup': '0 20px 50px -12px rgba(0, 0, 0, 0.2)', 
+                        'mockup-mobile': '0 10px 20px -5px rgba(0, 0, 0, 0.2)',
                     },
                     animation: {
-                        'slide-up': 'slideUp 0.3s ease-out forwards',
-                        'bounce-slow': 'bounce 3s infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'slide-in-left': 'slideInLeft 0.3s ease-out forwards',
-                        'fade-in': 'fadeIn 0.2s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'scroll': 'scroll 25s linear infinite', 
+                        'scroll-reverse': 'scrollReverse 25s linear infinite', 
+                        'pulse-slow': 'slowPulse 8s ease-in-out infinite',
                     },
                     keyframes: {
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        slideInLeft: {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.95)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' },
-                        }
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+                        scrollReverse: { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+                        slowPulse: { '0%, 100%': { opacity: '1', transform: 'scale(1)' }, '50%': { opacity: '0.6', transform: 'scale(1.05)' } }
                     }
                 }
             }
         }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
-
     <style>
-        /* 커스텀 스크롤바 */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #475569;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        
-        .modal-enter {
-            opacity: 0;
-            transform: scale(0.95);
-            animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes modalIn {
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .tabular-nums {
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -0.02em;
-        }
-
-        .chat-bubble {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 16px;
-            font-size: 1rem;
-            line-height: 1.4;
-            position: relative;
-            word-wrap: break-word;
-        }
-        .chat-user {
-            background-color: #3b82f6;
-            color: white;
-            border-bottom-right-radius: 4px;
-            margin-left: auto;
-        }
-        .chat-ai {
-            background-color: #f1f5f9;
-            color: #1e293b;
-            border-bottom-left-radius: 4px;
-        }
-        .dark .chat-ai {
-            background-color: #334155;
-            color: #f1f5f9;
-        }
-        
-        .mobile-menu-overlay {
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-        }
+        html { scroll-snap-type: y mandatory; overflow-y: scroll; }
+        @media (max-height: 600px) { html { scroll-snap-type: none; } }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+        body::-webkit-scrollbar { display: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .nav-link.active .nav-dot { opacity: 1; }
+        .nav-link.active span { color: #FF6D2B; font-weight: 700; }
+        .text-gradient { background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(to right, #FF6D2B, #FF9A6C); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="bg-[#f3f6fb] text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans text-lg transition-colors duration-300 selection:bg-blue-500 selection:text-white">
+<body class="font-sans antialiased text-gray-900 bg-gray-50">
 
-    <div class="flex min-h-screen relative">
-        
-        <div id="mobile-menu-container" class="fixed inset-0 z-[60] hidden">
-            <div id="mobile-menu-backdrop" class="absolute inset-0 mobile-menu-overlay transition-opacity"></div>
-            <div class="absolute inset-y-0 left-0 w-64 bg-white dark:bg-slate-900 shadow-2xl animate-slide-in-left flex flex-col">
-                <div class="p-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-[48px] h-[48px] relative flex items-center justify-center">
-                            <img src="img/main_robot.gif" alt="Logo" class="w-full h-full object-contain">
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md text-white border-b border-gray-900 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 relative">
+                <div class="flex-shrink-0 flex items-center justify-start">
+                    <a href="#main" class="block">
+                        <img src="logo_track.png" alt="TRACKCHAIN" class="w-[216px] h-[36px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/216x36/black/white?text=TRACKCHAIN';">
+                    </a>
+                </div>
+
+                <div class="hidden lg:block">
+                    <div id="desktop-menu-container" class="ml-10 flex items-center space-x-8">
                         </div>
-                        <span class="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-br from-[#2563EB] to-sky-400 dark:text-white">RoboAdvisor</span>
-                    </div>
-                    <button id="mobile-menu-close" class="text-slate-500 hover:text-slate-800 dark:hover:text-white">
-                        <i data-lucide="x" class="w-6 h-6"></i>
-                    </button>
-                </div>
-
-                <div class="p-4 relative">
-                    <div id="mobile-search-container" class="relative">
-                        <div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-2 border border-slate-200 dark:border-slate-700">
-                            <i data-lucide="search" class="text-slate-400 mr-2 w-4 h-4"></i>
-                            <input id="mobile-search-input" type="text" placeholder="종목, 리포트 검색..." class="bg-transparent border-none outline-none text-base w-full placeholder-slate-500 text-slate-900 dark:text-slate-100"/>
-                        </div>
-                        
-                        <div id="mobile-search-dropdown" class="absolute top-full left-0 w-full mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm dark:shadow-black/60 z-20 hidden overflow-hidden">
-                            <div class="p-4">
-                                <div class="flex justify-between items-center mb-3">
-                                    <span class="text-sm font-bold text-slate-500 dark:text-slate-400">최근 검색어</span>
-                                    <button class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">지우기</button>
-                                </div>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <div class="inline-flex items-center px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer group">
-                                        <span>삼성전자</span>
-                                        <button class="ml-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 focus:outline-none"><i data-lucide="x" class="w-3 h-3"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <nav class="flex-1 px-4 space-y-2 overflow-y-auto">
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-xl bg-blue-600 text-white">
-                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                        <span class="font-medium">대시보드</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-xl text-base text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                        <i data-lucide="wallet" class="w-5 h-5"></i>
-                        <span class="font-medium">나의 자산</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-xl text-base text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                        <i data-lucide="pie-chart" class="w-5 h-5"></i>
-                        <span class="font-medium">투자 분석</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-xl text-base text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                        <i data-lucide="shield-check" class="w-5 h-5"></i>
-                        <span class="font-medium">보안 리포트</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-xl text-base text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                        <i data-lucide="settings" class="w-5 h-5"></i>
-                        <span class="font-medium">설정</span>
-                    </a>
-                </nav>
-            </div>
-        </div>
-
-        <aside class="hidden lg:flex flex-col w-64 border-r border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 backdrop-blur-xl fixed h-full z-50 transition-colors duration-300">
-            <div class="p-6 flex items-center space-x-3">
-                <div class="w-[48px] h-[48px] relative flex items-center justify-center">
-                    <img src="img/main_robot.gif" alt="3D Logo" class="w-full h-full object-contain drop-shadow-lg hover:scale-110 transition-transform">
-                </div>
-                <span class="text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-[#2563EB] to-sky-400 dark:text-white">RoboAdvisor</span>
-            </div>
-
-            <nav class="flex-1 px-4 space-y-2 mt-4">
-                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/30 dark:shadow-blue-900/50">
-                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                    <span class="font-medium">대시보드</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                    <i data-lucide="wallet" class="w-5 h-5"></i>
-                    <span class="font-medium">나의 자산</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                    <i data-lucide="pie-chart" class="w-5 h-5"></i>
-                    <span class="font-medium">투자 분석</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                    <i data-lucide="shield-check" class="w-5 h-5"></i>
-                    <span class="font-medium">보안 리포트</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white">
-                    <i data-lucide="settings" class="w-5 h-5"></i>
-                    <span class="font-medium">설정</span>
-                </a>
-            </nav>
-
-            <div class="p-4 mx-4 mt-4 mb-8 bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                <div class="flex items-center space-x-2 mb-2 text-blue-600 dark:text-blue-400">
-                    <i data-lucide="zap" class="w-4 h-4"></i>
-                    <span class="text-base font-bold">AI Pro 플랜</span>
-                </div>
-                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">더 정교한 AI 분석을 받아보세요.</p>
-                <button class="w-full py-2 text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors shadow-md shadow-blue-500/20">
-                    업그레이드
-                </button>
-            </div>
-        </aside>
-
-        <main class="flex-1 lg:ml-64 relative pb-20">
-            
-            <header class="sticky top-0 z-40 flex items-center justify-between px-4 min-[431px]:px-6 lg:px-10 py-4 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-300">
-                <div class="flex items-center lg:hidden">
-                    <button id="mobile-menu-btn" class="text-slate-500 dark:text-slate-400 mr-4 cursor-pointer focus:outline-none">
-                        <i data-lucide="menu"></i>
-                    </button>
-                    <span class="font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#2563EB] to-sky-400 dark:text-white">RoboAdvisor</span>
                 </div>
                 
-                <div id="desktop-search-container" class="hidden lg:flex items-center relative w-96">
-                    <div class="flex items-center bg-slate-100 dark:bg-slate-800/50 rounded-full px-4 py-2 border border-slate-200 dark:border-slate-700 w-full transition-colors">
-                        <i data-lucide="search" class="text-slate-400 mr-2 w-4 h-4"></i>
-                        <input id="desktop-search-input" type="text" placeholder="종목, 리포트 검색..." class="bg-transparent border-none outline-none text-base w-full placeholder-slate-500 text-slate-900 dark:text-slate-100"/>
-                    </div>
-
-                    <div id="desktop-search-dropdown" class="absolute top-full left-0 w-full mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm dark:shadow-black/60 z-50 hidden overflow-hidden animate-fade-in">
-                        <div class="p-4">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-sm font-bold text-slate-500 dark:text-slate-400">최근 검색어</span>
-                                <button class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">지우기</button>
-                            </div>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <div class="inline-flex items-center px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer group">
-                                    <span>삼성전자</span>
-                                    <button class="ml-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 focus:outline-none"><i data-lucide="x" class="w-3 h-3"></i></button>
-                                </div>
-                                <div class="inline-flex items-center px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer group">
-                                    <span>2차전지</span>
-                                    <button class="ml-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 focus:outline-none"><i data-lucide="x" class="w-3 h-3"></i></button>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3 border-t border-slate-100 dark:border-slate-800 pt-4 mt-2">
-                                <span class="text-sm font-bold text-slate-500 dark:text-slate-400 block">실시간 인기 종목 🔥</span>
-                            </div>
-                            
-                            <ul id="stock-list" class="space-y-1">
-                                </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-4">
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400">
-                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
-                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
-                    </button>
-
-                    <div class="relative">
-                        <button id="notification-btn" class="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                            <i data-lucide="bell" class="w-5 h-5 text-slate-500 dark:text-slate-400"></i>
-                            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-slate-950"></span>
-                        </button>
-                        
-                        <div id="notification-modal" class="hidden absolute top-12 -right-12 md:right-0 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm dark:shadow-black/60 z-50 overflow-hidden origin-top-right">
-                            <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-white dark:bg-slate-900">
-                                <span class="font-bold text-slate-900 dark:text-white text-base">알림</span>
-                                <button class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">모두 읽음</button>
-                            </div>
-                            <ul class="max-h-[300px] overflow-y-auto bg-white dark:bg-slate-900">
-                                <li class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer border-b border-slate-100 dark:border-slate-800/50 transition-colors group">
-                                    <div class="flex items-start space-x-3">
-                                        <div class="bg-blue-500/10 p-2 rounded-full mt-0.5 group-hover:bg-blue-500/20 transition-colors">
-                                            <i data-lucide="file-text" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-base text-slate-800 dark:text-slate-200 font-semibold">새로운 AI 리포트 도착</p>
-                                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-snug">회원님의 12월 포트폴리오 분석이 완료되었습니다.</p>
-                                            <span class="text-[10px] text-slate-400 mt-2 block">10분 전</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer border-b border-slate-100 dark:border-slate-800/50 transition-colors group">
-                                    <div class="flex items-start space-x-3">
-                                        <div class="bg-emerald-500/10 p-2 rounded-full mt-0.5 group-hover:bg-emerald-500/20 transition-colors">
-                                            <i data-lucide="trending-up" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-base text-slate-800 dark:text-slate-200 font-semibold">목표 수익률 달성!</p>
-                                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-snug">관심 종목 '안랩'이 목표가 72,000원에 도달했습니다.</p>
-                                            <span class="text-[10px] text-slate-400 mt-2 block">1시간 전</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="relative">
-                        <div id="profile-btn" class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 border-2 border-slate-200 dark:border-slate-800 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all"></div>
-                        <div id="profile-dropdown" class="hidden absolute top-12 right-0 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm dark:shadow-black/60 z-50 overflow-hidden origin-top-right animate-fade-in">
-                            <div class="p-4 border-b border-slate-100 dark:border-slate-800">
-                                <p class="text-xl font-bold text-slate-900 dark:text-white mb-1">김철수 님</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">user@example.com</p>
-                            </div>
-                            <ul class="py-1">
-                                <li>
-                                    <a href="#" class="block p-4 text-base text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                                        내 정보 수정
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block p-4 text-base text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                                        설정
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block p-4 text-base text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
-                                        로그아웃
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <section id="hero-section" class="relative w-full transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-b border-slate-200 dark:border-slate-800 overflow-hidden h-[400px]">
-                <div class="absolute inset-0 bg-[#f3f6fb] dark:bg-slate-900 transition-colors duration-300 -z-10">
-                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/50 via-[#f3f6fb] to-[#f3f6fb] dark:from-blue-900/40 dark:via-slate-950 dark:to-slate-950"></div>
-                </div>
-                <button id="hero-toggle-btn" class="absolute top-4 right-4 min-[431px]:right-6 lg:right-10 z-30 flex items-center space-x-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-600 transition-all shadow-sm">
-                    <span id="hero-btn-text">간략히 보기</span>
-                    <i data-lucide="chevron-up" id="hero-btn-icon" class="w-3.5 h-3.5"></i>
-                </button>
-                <div id="hero-expanded" class="absolute inset-0 transition-opacity duration-500 opacity-100">
-                    <spline-viewer url="https://prod.spline.design/7Ffx6egDLV36c2Tj/scene.splinecode" class="w-full h-full"></spline-viewer>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <div class="text-center z-10">
-                             <h1 class="text-[32px] lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-sky-200 mb-5 drop-shadow-[0_0_15px_rgba(59,130,246,0.6)] tracking-tight">Your Wealth Dimension</h1>
-                            <p class="text-white text-base lg:text-lg font-medium tracking-wide bg-white/30 dark:bg-slate-900/30 backdrop-blur-md px-4 py-1 rounded-full inline-block border border-white/20">다각도로 분석하는 자산의 흐름</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="hero-collapsed" class="absolute inset-0 transition-opacity duration-500 opacity-0 pointer-events-none z-20">
-                    <div class="md:hidden h-full relative">
-                        <div class="absolute top-4 left-6 flex items-center h-[30px]">
-                             <div class="flex items-center bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200/50 dark:border-blue-800/30">
-                                <i data-lucide="shield-check" class="text-blue-500 dark:text-blue-400 mr-1.5 w-3.5 h-3.5"></i>
-                                <span class="text-blue-600 dark:text-blue-400 font-semibold text-xs">안전</span>
-                            </div>
-                        </div>
-                        
-                        <div class="absolute bottom-6 left-6 right-6 flex flex-row items-center w-full">
-                            <div class="flex flex-col">
-                                <span class="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">총 자산 (Total Assets)</span>
-                                <span class="text-xl min-[431px]:text-2xl font-bold text-slate-900 dark:text-white tabular-nums whitespace-nowrap">₩ 128,450,000</span>
-                            </div>
-                            <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-6"></div>
-                            <div class="flex flex-col items-start">
-                                <span class="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">오늘의 수익 (Today)</span>
-                                <span class="text-xl min-[431px]:text-2xl font-bold text-emerald-500 dark:text-emerald-400 flex items-center tabular-nums whitespace-nowrap">
-                                    + ₩ 1,240,000 <i data-lucide="trending-up" class="ml-1 w-4 h-4 min-[431px]:w-5 min-[431px]:h-5"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="hidden md:flex absolute bottom-0 left-0 right-0 p-6 lg:px-10 justify-between items-end">
-                        <div class="flex items-center space-x-6">
-                            <div class="flex flex-col">
-                                <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">총 자산 (Total Assets)</span>
-                                <span class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white tabular-nums whitespace-nowrap">₩ 128,450,000</span>
-                            </div>
-                            <div class="h-8 w-px bg-slate-300 dark:bg-slate-700"></div>
-                            <div class="flex flex-col">
-                                <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">오늘의 수익 (Today)</span>
-                                <span class="text-lg sm:text-2xl font-bold text-emerald-500 dark:text-emerald-400 flex items-center tabular-nums whitespace-nowrap">
-                                    + ₩ 1,240,000 <i data-lucide="trending-up" class="ml-1 w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-end h-[48px]">
-                             <div class="text-slate-600 dark:text-slate-400 text-base flex items-center bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200/50 dark:border-blue-800/30">
-                                <i data-lucide="shield-check" class="text-blue-500 dark:text-blue-400 mr-2 w-5 h-5"></i>
-                                <span class="text-blue-600 dark:text-blue-400 font-semibold whitespace-nowrap">안전</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="dashboard-container flex flex-col px-4 py-6 min-[431px]:p-6 lg:p-10 gap-6 xl:gap-10 max-w-7xl mx-auto">
-                
-                <div id="quick-stats" class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-enter">
-                    <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-sm shadow-lg shadow-slate-200/50 dark:shadow-none transition-all group relative overflow-hidden h-full flex flex-col justify-between hover:border-[#2563EB]">
-                        <div class="flex justify-between items-start mb-2 relative z-10">
-                            <span class="text-slate-500 dark:text-slate-400 text-base">총 자산</span>
-                            <img src="img/maininfo_01.png" alt="3D Wallet" class="w-14 h-14 -mt-2 -mr-2 object-contain drop-shadow-md animate-float transition-transform group-hover:scale-110">
-                        </div>
-                        <div class="text-2xl font-bold text-slate-900 dark:text-white mb-1 tabular-nums relative z-10">₩ 128,450,000</div>
-                        <div class="flex flex-wrap items-center gap-2 relative z-10">
-                            <div class="text-xs text-emerald-500 dark:text-emerald-400 flex items-center font-medium tabular-nums">+12.5%</div>
-                            <span class="text-xs text-slate-400 dark:text-slate-500 tabular-nums">(오늘 +₩ 1,240,000)</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-sm shadow-lg shadow-slate-200/50 dark:shadow-none transition-all group relative overflow-hidden h-full flex flex-col justify-between hover:border-[#2563EB]">
-                        <div class="flex justify-between items-start mb-2 relative z-10">
-                            <span class="text-slate-500 dark:text-slate-400 text-base">AI 보안 점수</span>
-                            <img src="img/maininfo_02.png" alt="3D Shield" class="w-12 h-12 -mt-1 -mr-1 object-contain drop-shadow-md animate-float transition-transform group-hover:scale-110" style="animation-delay: 1s;">
-                        </div>
-                        <div class="text-2xl font-bold text-slate-900 dark:text-white mb-1 tabular-nums relative z-10">94 <span class="text-sm font-normal text-slate-400 dark:text-slate-500">/ 100</span></div>
-                        <div class="text-xs text-blue-500 dark:text-blue-400 relative z-10">모든 계좌가 안전하게 보호 중입니다.</div>
-                    </div>
-
-                    <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-sm shadow-lg shadow-slate-200/50 dark:shadow-none transition-all group relative overflow-hidden h-full flex flex-col justify-between hover:border-[#2563EB]">
-                        <div class="flex justify-between items-start mb-2 relative z-10">
-                            <span class="text-slate-500 dark:text-slate-400 text-base">월간 배당금</span>
-                            <img src="img/maininfo_03.png" alt="3D Card" class="w-14 h-14 -mt-2 -mr-2 object-contain drop-shadow-md animate-float transition-transform group-hover:scale-110" style="animation-delay: 2s;">
-                        </div>
-                        <div class="text-2xl font-bold text-slate-900 dark:text-white mb-1 tabular-nums relative z-10">₩ 325,000</div>
-                        <div id="dividend-date" class="text-xs text-slate-500 dark:text-slate-400 relative z-10">다음 입금 예정일: -</div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-10">
-                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-lg shadow-slate-200/50 dark:shadow-none relative transition-colors duration-300 flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-5">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">자산 포트폴리오</h3>
-                                <p class="text-base text-slate-500 dark:text-slate-400">내 자산의 분산 투자 비율</p>
-                            </div>
-                            <button class="text-sm font-normal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors mt-0.5">
-                                전체 보기
-                            </button>
-                        </div>
-                        
-                        <div class="flex-1 flex flex-col justify-center gap-4">
-                            <div class="relative h-48 lg:h-56 w-full flex justify-center items-center translate-y-1 lg:translate-y-0">
-                                <canvas id="portfolioChart" class="relative z-10"></canvas>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-                                    <span class="text-3xl font-bold text-slate-900 dark:text-white tabular-nums">55%</span>
-                                    <span class="text-xs text-blue-500 dark:text-blue-400 font-medium">주식 비중</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-center items-center space-x-4 mt-5 -translate-y-1 lg:translate-y-0">
-                                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span><span class="text-sm text-slate-500 dark:text-slate-400">주식</span></div>
-                                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-purple-500 mr-2"></span><span class="text-sm text-slate-500 dark:text-slate-400">채권</span></div>
-                                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-emerald-500 mr-2"></span><span class="text-sm text-slate-500 dark:text-slate-400">현금</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-lg shadow-slate-200/50 dark:shadow-none transition-colors duration-300 flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">월별 지출 추이</h3>
-                                <p class="text-base text-slate-500 dark:text-slate-400">최근 소비 패턴 분석</p>
-                            </div>
-                            <button class="text-sm font-normal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors whitespace-nowrap mt-0.5">
-                                전체 보기
-                            </button>
-                        </div>
-                        
-                        <div class="flex-1 flex flex-col justify-center gap-4">
-                             <div class="h-56 w-full flex items-center justify-center"><canvas id="expenseChart"></canvas></div>
-                             <div class="p-3 bg-slate-100 dark:bg-slate-800/50 rounded-lg flex items-start space-x-3 transition-colors">
-                                <div class="p-1.5 bg-emerald-500/20 rounded-md mt-0.5"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400"></i></div>
-                                <div>
-                                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-1">지난달 대비 지출이 <span class="text-emerald-600 dark:text-emerald-400 font-bold tabular-nums">12% 감소</span>했습니다.</p>
-                                    <p class="text-xs text-slate-500">매우 훌륭한 소비 습관입니다!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-lg shadow-slate-200/50 dark:shadow-none transition-colors duration-300">
-                    <div class="flex justify-between items-start mb-6">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center">
-                                <i data-lucide="bot" class="mr-2 text-purple-500 dark:text-purple-400 w-5 h-5"></i>
-                                AI 보안 테마 추천
-                            </h3>
-                            <p class="text-base text-slate-500 dark:text-slate-400 mt-1">회원님의 투자 성향과 매칭되는 오늘의 추천 종목</p>
-                        </div>
-                        <button class="text-sm font-normal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors whitespace-nowrap mt-0.5">
-                            전체 보기
-                        </button>
-                    </div>
-
-                    <div id="recommendation-list" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        </div>
-                </div>
-
-                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg shadow-slate-200/50 dark:shadow-none overflow-hidden transition-colors duration-300">
-                    <div class="p-6 pb-0 md:pb-6 md:border-b border-b-0 border-slate-200 dark:border-slate-800 flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center">
-                            <i data-lucide="list" class="mr-2 text-blue-500 dark:text-blue-400 w-5 h-5"></i>
-                            최근 거래 내역
-                        </h3>
-                        <button class="text-sm font-normal text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
-                            전체 보기
-                        </button>
-                    </div>
-                    
-                    <div class="hidden md:block overflow-x-auto">
-                        <table class="w-full text-sm text-left">
-                            <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 font-medium text-base">
-                                <tr>
-                                    <th class="px-6 py-4 whitespace-nowrap">거래 일시</th>
-                                    <th class="px-6 py-4 whitespace-nowrap">종류</th>
-                                    <th class="px-6 py-4 whitespace-nowrap">종목/내용</th>
-                                    <th class="px-6 py-4 text-right whitespace-nowrap">금액</th>
-                                    <th class="px-6 py-4 text-center whitespace-nowrap">상태</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transaction-list" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
-                        </table>
-                    </div>
-
-                    <div class="md:hidden px-6 pb-6 pt-6 space-y-4" id="transaction-list-mobile"></div>
-                </div>
-
-            </div>
-        </main>
-        
-        <button id="chat-fab" class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full shadow-md shadow-blue-500/10 flex items-center justify-center text-white hover:scale-105 transition-transform z-50 group animate-bounce-slow">
-            <i data-lucide="message-square-more" class="w-6 h-6"></i>
-            <span class="absolute right-full mr-3 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">AI 상담 시작</span>
-        </button>
-
-        <div id="chat-window" class="fixed inset-0 m-auto md:inset-auto md:bottom-24 md:right-6 w-[90%] max-w-sm md:w-96 h-[500px] bg-white dark:bg-slate-900 rounded-2xl shadow-sm dark:shadow-black/80 border border-slate-200 dark:border-slate-800 z-50 hidden flex flex-col overflow-hidden animate-slide-up">
-            <div class="p-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex justify-between items-start">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                        <i data-lucide="bot" class="text-white w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-base text-slate-900 dark:text-white">AI 자산 비서</h4>
-                        <span class="text-xs text-emerald-500 flex items-center"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1"></span>온라인</span>
-                    </div>
-                </div>
-                <button id="close-chat" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 mt-1">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-white dark:bg-slate-900">
-                <div class="flex items-start space-x-2">
-                    <div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="bot" class="w-5 h-5 text-slate-500 dark:text-slate-400"></i>
-                    </div>
-                    <div class="chat-bubble chat-ai">
-                        안녕하세요! 회원님의 포트폴리오 분석을 도와드릴까요? 궁금한 점을 물어보세요. 😊
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-2 justify-end">
-                    <div class="chat-bubble chat-user">
-                        내 포트폴리오 상태 어때?
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-2">
-                    <div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="bot" class="w-5 h-5 text-slate-500 dark:text-slate-400"></i>
-                    </div>
-                    <div class="chat-bubble chat-ai">
-                        현재 회원님의 포트폴리오(주식 55%, 채권 30%, 현금 15%)는 안정적인 수익률을 보이고 있습니다. 다만, 최근 변동성이 큰 기술주 비중이 다소 높으니 주의가 필요합니다.
-                    </div>
-                </div>
-            </div>
-            <div class="p-3 bg-slate-50 dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700">
-                <div class="flex space-x-2">
-                    <input id="chat-input" type="text" placeholder="메시지를 입력하세요..." class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white text-base rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" onkeypress="if(event.key === 'Enter') sendMessage()">
-                    <button onclick="sendMessage()" class="bg-blue-600 hover:bg-blue-500 text-white rounded-lg px-3 py-2 transition-colors">
-                        <i data-lucide="send" class="w-4 h-4"></i>
+                <div class="flex lg:hidden z-20 absolute right-0 top-1/2 transform -translate-y-1/2">
+                    <button onclick="toggleMenu()" class="text-white hover:text-primary focus:outline-none p-2 transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                 </div>
             </div>
         </div>
+    </nav>
 
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+        <div class="flex justify-end p-6 absolute top-0 right-0 w-full">
+            <button onclick="toggleMenu()" class="text-white hover:text-primary transition-colors p-2">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu-items" class="flex flex-col px-10 space-y-8 h-full justify-center text-center">
+             </div>
     </div>
 
+    <section id="main" class="snap-start relative min-h-screen h-[100dvh] bg-dark overflow-hidden flex items-center justify-center text-white w-full">
+        <div class="absolute inset-0 z-0">
+             <img src="img/bg_mobile.png" alt="Mobile Background" class="absolute inset-0 w-full h-full object-cover md:hidden" onerror="this.onerror=null; this.src='https://placehold.co/600x900/111/333?text=Mobile+BG';">
+             <img src="img/bg_web.png" alt="Web Background" class="absolute inset-0 w-full h-full object-cover hidden md:block" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/111/333?text=Web+BG';">
+             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+             <div class="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-primary/30 rounded-full blur-[100px] md:blur-[140px] pointer-events-none animate-pulse-slow"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+            <div class="animate-[fadeInUp_1s_ease-out_forwards] flex flex-col items-center md:items-start text-center md:text-left w-full">
+                <span class="text-primary font-bold tracking-widest mb-4 animate-fade-in drop-shadow-md">INNOVATION & TECHNOLOGY</span>
+                <h1 class="text-[44px] leading-[54px] md:text-[64px] md:leading-[80px] font-bold mb-6 break-keep drop-shadow-xl">
+                    혁신적인 금융과<br><span class="text-gradient">기술의 접목</span>
+                </h1>
+                <p class="text-[16px] md:text-[18px] text-gray-200 leading-relaxed max-w-[600px] break-keep drop-shadow-lg">
+                    블록체인 기술을 바탕으로 산업 간 협력을 이끌어내며,<br>기존 비즈니스에 새로운 가치를 더하는 <br class="md:hidden">통합 플랫폼 솔루션을 제공합니다.
+                </p>
+                <div class="mt-10 flex gap-4">
+                    <a href="#business" class="w-[144px] h-[56px] flex items-center justify-center px-4 bg-primary text-white font-bold rounded-full hover:bg-orange-600 transition-colors shadow-lg">서비스 소개</a>
+                    <a href="#partners-contact" class="w-[144px] h-[56px] flex items-center justify-center px-4 bg-black/20 border border-white/30 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/10 transition-colors">문의하기</a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-[40px] w-full flex flex-col items-center justify-center z-20 opacity-80 hover:opacity-100 transition-opacity cursor-pointer" onclick="document.getElementById('value').scrollIntoView({behavior: 'smooth'})">
+            <div class="w-[30px] h-[50px] border-2 border-white/50 rounded-full flex justify-center p-2 mb-2">
+                <div class="w-1.5 h-1.5 bg-white rounded-full animate-bounce"></div>
+            </div>
+            <p class="text-[10px] tracking-[0.2em] uppercase text-white/70">Scroll Down</p>
+        </div>
+    </section>
+
+    <section id="value" class="snap-start relative min-h-screen bg-white flex items-center w-full py-20 md:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full md:pt-5">
+            <div class="flex flex-col md:flex-row md:items-start">
+                <div class="md:w-1/3 mb-12 md:mb-0 relative text-center md:text-left md:sticky md:top-32">
+                    <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold text-gray-900">VALUE & VISION</h2>
+                    <p class="mt-3 text-[16px] md:text-[18px] text-gray-500 leading-relaxed break-keep max-w-md mx-auto md:mx-0">
+                        트랙체인은 기술을 통해 새로운 금융의 미래를 그려갑니다.
+                    </p>
+                </div>
+                
+                <div id="value-cards-container" class="md:w-auto flex-1 space-y-6 md:pl-[80px] flex flex-col md:items-end">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="business" class="snap-start relative min-h-screen bg-[#F8F9FA] flex items-center w-full py-20 md:py-0 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-0 md:gap-12 relative">
+                <div class="contents md:flex md:w-1/2 md:flex-col md:items-start md:text-left md:pl-[104px] z-10">
+                    <h2 class="order-1 md:order-none text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold mb-6 md:mb-12 text-center md:text-left text-gray-900">BUSINESS</h2>
+                    <div class="order-2 md:order-none w-full flex justify-center md:justify-start mb-6 md:mb-12">
+                        <div id="tab-container" class="inline-flex bg-white p-1.5 rounded-full border border-gray-200 shadow-sm gap-1 overflow-x-auto max-w-full no-scrollbar">
+                            <button onclick="switchTab('redart')" id="btn-redart" class="tab-btn active-tab">redart</button>
+                            <button onclick="switchTab('pick')" id="btn-pick" class="tab-btn inactive-tab">Pick</button>
+                            <button onclick="switchTab('tcwallet')" id="btn-tcwallet" class="tab-btn inactive-tab">TC Wallet</button>
+                        </div>
+                    </div>
+                    <div class="order-4 md:order-none h-auto min-h-[180px] w-full flex flex-col items-center md:items-start text-center md:text-left mt-0 relative">
+                        <div id="content-redart" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-100 translate-y-0">
+                            <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">레드아트</h3>
+                            <p class="text-[18px] font-bold mb-2 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">작가와 대중이 소통할 수 있는 가장 쉬운<br>아트 & 테크 모바일 플랫폼</p>
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">전시 관람 전부터 전시 현장, 관람 후까지 <br>작가, 전시, 작품과 끊김 없이 소통해 보세요.</p>
+                        </div>
+                        <div id="content-pick" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
+                            <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">픽 (Pick)</h3>
+                            <p class="text-[18px] font-bold mb-2 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">디지털 자산 포트폴리오, 흩어져 있는 <br>자산을 한 눈에 통합 조회·관리</p>
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">개인형부터 중앙형까지, 다양한 유형의 디지털 자산 포트폴리오를 한 눈에 파악하고 효율적으로 관리하세요.</p>
+                        </div>
+                        <div id="content-tcwallet" class="text-content absolute top-0 w-full transition-all duration-500 ease-out opacity-0 translate-y-4 pointer-events-none">
+                            <h3 class="hidden md:block text-[24px] md:text-[30px] font-bold mb-4 text-gray-900">TC Wallet</h3>
+                            <p class="text-[18px] font-bold mb-2 text-gray-800 max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">안전하고 편리한 기업용 디지털<br>자산 관리 솔루션</p>
+                            <p class="text-[16px] text-gray-600 leading-relaxed max-w-[280px] md:max-w-[340px] mx-auto md:mx-0 break-keep">기업의 Web3 비즈니스를 위한 강력한 보안<br>(MPC 기술)과 편의성을 제공합니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="business-swipe-area-mobile" class="reveal order-3 md:order-none w-full flex justify-center items-center relative mb-6 md:mb-0 md:hidden touch-pan-y py-4" style="transition-delay: 0.2s;">
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-gradient-to-tr from-primary/40 via-orange-200/40 to-transparent rounded-full z-0 blur-3xl"></div>
+                    <div class="relative w-[220px] h-[440px] z-10 transform transition-transform hover:scale-105 duration-300">
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[38px] shadow-mockup-mobile z-0"></div>
+                        <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/220x440/transparent/transparent';">
+                        <div class="absolute inset-0 w-full h-full z-20 p-[12px]">
+                            <div class="w-full h-full rounded-[26px] overflow-hidden bg-gray-100 relative">
+                                <img id="screen-redart-mobile" src="img/phone_01.png" alt="redart" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=redart+App';">
+                                <img id="screen-pick-mobile" src="img/phone_02.png" alt="Pick" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=Pick+App';">
+                                <img id="screen-tcwallet-mobile" src="img/phone_03.png" alt="TC Wallet" class="screen-img-mobile absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/196x416/eee/ccc?text=TC+Wallet+App';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="business-swipe-area-desktop" class="reveal w-full md:w-1/2 justify-center items-center relative hidden md:flex md:-ml-20 md:-translate-x-[30px] touch-pan-y" style="transition-delay: 0.2s;">
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-primary/30 via-orange-100/20 to-transparent rounded-full z-0 blur-[80px]"></div>
+                    <div class="relative w-[320px] h-[640px] z-10 transform transition-transform hover:scale-105 duration-500">
+                        <div class="absolute top-0 bottom-0 left-[1px] right-[1px] bg-white rounded-[48px] shadow-mockup z-0"></div>
+                        <img src="img/phoneframe.png" alt="Phone Frame" class="absolute inset-0 w-full h-full object-contain z-30 pointer-events-none" onerror="this.onerror=null; this.src='https://placehold.co/310x624/transparent/transparent';">
+                        <div class="absolute inset-0 w-full h-full z-20 p-[18px]">
+                            <div class="w-full h-full rounded-[30px] overflow-hidden bg-gray-100 relative shadow-inner">
+                                <img id="screen-redart-desktop" src="img/phone_01.png" alt="redart" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=redart+App';">
+                                <img id="screen-pick-desktop" src="img/phone_02.png" alt="Pick" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=Pick+App';">
+                                <img id="screen-tcwallet-desktop" src="img/phone_03.png" alt="TC Wallet" class="screen-img-desktop absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" onerror="this.onerror=null; this.src='https://placehold.co/284x604/eee/ccc?text=TC+Wallet+App';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="snap-start relative min-h-screen bg-white flex items-center w-full py-20 md:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-12 reveal text-center md:text-left">
+                <div class="w-full md:w-auto">
+                    <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold text-gray-900 mt-2">PRESS</h2>
+                </div>
+            </div>
+            
+            <div id="press-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 mb-12">
+                </div>
+
+            <div class="text-center reveal">
+                <a href="#" class="inline-flex items-center justify-center h-[56px] px-10 rounded-full border border-gray-300 text-gray-600 font-bold hover:bg-black hover:text-white hover:border-black transition-all duration-300 group">
+                    <span class="text-[16px]">기사 전체 보기</span>
+                    <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners-contact" class="snap-start min-h-screen flex flex-col bg-darkLighter text-white relative">
+        <div class="bg-darkLighter flex-shrink-0 py-16 flex flex-col justify-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center reveal w-full">
+                <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold">PARTNERS</h2>
+                <p class="text-gray-400 mt-3 text-[16px] md:text-[18px]">다양한 산업의 리더들과 함께 혁신을 만들어갑니다.</p>
+            </div>
+            
+            <div class="relative w-full overflow-hidden py-10 bg-darkLighter">
+                <div class="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-darkLighter to-transparent"></div>
+                <div class="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-darkLighter to-transparent"></div>
+                
+                <div id="partners-scroll-row1" class="flex whitespace-nowrap animate-scroll hover:[animation-play-state:paused] mb-4"></div>
+                <div id="partners-scroll-row2" class="flex whitespace-nowrap animate-scroll-reverse hover:[animation-play-state:paused]"></div>
+            </div>
+        </div>
+
+        <div class="flex-1 bg-dark text-white relative flex items-center py-16 overflow-hidden">
+             <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
+                 <div class="flex flex-col md:flex-row gap-16 items-center">
+                     <div class="md:w-1/2 reveal text-center md:text-left">
+                         <h2 class="text-[40px] md:text-[44px] leading-[50px] md:leading-[54px] font-bold mb-3">CONTACT US</h2>
+                         <p class="text-[16px] md:text-[18px] leading-[26px] text-gray-400 mb-8 break-keep">
+                             트랙체인과 함께 Web3 비즈니스를<br>성공적으로 이끌어갈 파트너를 기다립니다.
+                         </p>
+                         <div class="space-y-3 w-fit mx-auto md:mx-0">
+                             <div class="flex items-center justify-start text-gray-300 text-[16px] leading-[24px]">
+                                 <i class="fas fa-envelope w-6 text-primary text-center mr-2"></i>
+                                 <span>contact@trackchain.corp</span>
+                             </div>
+                             <div class="flex items-center justify-start text-gray-300 text-[16px] leading-[24px]">
+                                 <i class="fas fa-phone w-6 text-primary text-center mr-2"></i>
+                                 <span>02-1234-5678</span>
+                             </div>
+                             <div class="flex items-start justify-start text-gray-300 text-[16px] leading-[24px] text-left">
+                                 <i class="fas fa-map-marker-alt w-6 text-primary text-center mr-2 mt-1"></i>
+                                 <span>서울시 영등포구 여의대로 108<br class="md:hidden"> 파크원 타워1 26층</span>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="md:w-1/2 w-full bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 reveal" style="transition-delay: 0.2s;">
+                         <form class="space-y-4">
+                              <div class="relative">
+                                 <select class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                                     <option>문의유형 선택</option><option>제휴 문의</option><option>채용 문의</option><option>기타</option>
+                                 </select>
+                                 <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
+                             </div>
+                             <div><input type="email" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="이메일 주소"></div>
+                             <div><textarea rows="4" class="w-full bg-darkLighter border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none" placeholder="문의 내용"></textarea></div>
+                             <button type="button" onclick="alert('문의가 접수되었습니다.')" class="w-full py-4 bg-primary hover:bg-primaryHover text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md shadow-primary/20">보내기</button>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <footer class="snap-start w-full bg-black text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+                <div>
+                    <div class="mb-6 flex justify-start"><img src="img/img_logo_footer.png" alt="TRACKCHAIN" class="h-[48px] w-auto object-contain object-left" onerror="this.onerror=null; this.src='https://placehold.co/120x48/black/white?text=LOGO';"></div>
+                    <div class="text-sm space-y-2 text-gray-500">
+                        <p>서울시 영등포구 여의대로 108 파크원 타워1 26층</p><p>사업자등록번호: 383-86-02358</p>
+                        <p class="pt-2">Copyright &copy; 2024 TRACKCHAIN Corp. All rights reserved.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col items-start md:items-end gap-4">
+                     <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-google-play fa-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-app-store-ios fa-lg"></i></a>
+                    </div>
+                    <div class="flex gap-4 text-xs font-medium text-gray-500"><a href="#" class="hover:text-white transition-colors">이용약관</a><a href="#" class="hover:text-white transition-colors">개인정보처리방침</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        lucide.createIcons();
-
-        function getRelativeDate(offsetDays, setHours, setMinutes) {
-            const date = new Date();
-            date.setDate(date.getDate() - offsetDays);
-            if(setHours !== undefined) date.setHours(setHours);
-            if(setMinutes !== undefined) date.setMinutes(setMinutes);
-            
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, '0');
-            const dd = String(date.getDate()).padStart(2, '0');
-            const hh = String(date.getHours()).padStart(2, '0');
-            const min = String(date.getMinutes()).padStart(2, '0');
-            
-            return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
-        }
-
-        const transactionList = document.getElementById('transaction-list');
-        const transactions = [
-            { 
-                date: getRelativeDate(0, 14, 30), 
-                type: '매수', 
-                typeClass: 'text-red-500 bg-red-100 dark:bg-red-500/10', 
-                title: '안랩 (053800)', 
-                amount: '₩ 1,250,000',
-                icon: 'trending-up', 
-                iconBg: 'bg-red-100 dark:bg-red-500/20 text-red-500' 
-            },
-            { 
-                date: getRelativeDate(1, 9, 15), 
-                type: '매도', 
-                typeClass: 'text-blue-500 bg-blue-100 dark:bg-blue-500/10', 
-                title: '삼성전자 (005930)', 
-                amount: '₩ 4,500,000',
-                icon: 'trending-down',
-                iconBg: 'bg-blue-100 dark:bg-blue-500/20 text-blue-500'
-            },
-            { 
-                date: getRelativeDate(2, 18, 20), 
-                type: '배당', 
-                typeClass: 'text-purple-600 bg-purple-100 dark:bg-purple-500/10', 
-                title: 'Apple Inc (AAPL)', 
-                amount: '$ 12.50',
-                icon: 'coins',
-                iconBg: 'bg-purple-100 dark:bg-purple-500/20 text-purple-500'
-            },
-            { 
-                date: getRelativeDate(5, 9, 0), 
-                type: '입금', 
-                typeClass: 'text-emerald-600 bg-emerald-100 dark:bg-emerald-500/10', 
-                title: '월 급여 이체', 
-                amount: '₩ 3,500,000',
-                icon: 'wallet',
-                iconBg: 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-500'
-            },
+        // --- 1. DATA DEFINITIONS (이 부분이 'Component Props' 역할) ---
+        
+        const navItems = [
+            { id: 'main', label: 'MAIN' },
+            { id: 'value', label: 'VALUE & VISION' },
+            { id: 'business', label: 'BUSINESS' },
+            { id: 'press', label: 'PRESS' },
+            { id: 'partners-contact', label: 'PARTNERS' },
         ];
 
-        // 1. 데스크탑 테이블 렌더링
-        if(transactionList) {
-            transactionList.innerHTML = transactions.map(t => `
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400 text-base tabular-nums whitespace-nowrap">${t.date}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 py-1 rounded text-xs font-bold ${t.typeClass}">${t.type}</span>
-                    </td>
-                    <td class="px-6 py-4 font-medium text-base text-slate-900 dark:text-white whitespace-nowrap">${t.title}</td>
-                    <td class="px-6 py-4 text-right font-bold text-base text-slate-900 dark:text-white tabular-nums whitespace-nowrap">${t.amount}</td>
-                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                        <span class="flex items-center justify-center text-sm text-emerald-500 dark:text-emerald-400 font-bold">
-                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 mr-1"></i> 완료
-                        </span>
-                    </td>
-                </tr>
-            `).join('');
+        const valueCards = [
+            { img: 'img/img_value01.gif', title: 'WEB3 여정의 파트너', desc: '우리는 누구나 Web3 생태계에 접근할 수 있는 쉽고 편리한 Web3 서비스를 만들며, 복잡한 기술을 직관적인 경험으로 바꿉니다.', delay: '' },
+            { img: 'img/img_value02.gif', title: '시대 흐름에 맞춘 WEB3 기술 활용', desc: '아트 특화 플랫폼 "redart"는 블록체인, NFT 등 Web3 기술 접목으로 아트 시장의 디지털 전환을 돕습니다.', delay: '0.1s' },
+            { img: 'img/img_value03.gif', title: 'WEB3 금융·보안 솔루션 제공', desc: '전통 금융과 디지털 자산 월렛(중앙형, 개인형)부터 DeFi까지, 강력한 보안 기술을 바탕으로 디지털 금융의 대중화에 기여합니다.', delay: '0.2s' },
+        ];
+
+        const newsData = [
+            { type: 'NEWS', title: '"웹3.0 기반 디지털 아트뱅킹 강화 위해 협력" 하나은행-트랙체인 MOU 체결', desc: '하나은행과 트랙체인이 미술품 조각투자 등 새로운 금융 상품 개발을 위해 협력합니다.', date: '2023. 12. 04', img: 'img/press_01.png', delay: '' },
+            { type: 'NEWS', title: '트랙체인, 농협금융 출범 10주년 NFT 발행', desc: '트랙체인이 NH농협과 협력하여 농업의 가치를 담은 멤버십 NFT를 발행합니다.', date: '2023. 08. 04', img: 'img/press_02.png', delay: '0.1s' },
+            { type: 'INTERVIEW', title: '트랙체인 대표 인터뷰: "Web3의 대중화가 우리의 목표"', desc: '블록체인 기술의 실생활 적용 방안과 트랙체인의 비전을 소개합니다.', date: '2023. 07. 04', img: 'img/press_03.png', delay: '0.2s' },
+            { type: 'TECH', title: '트랙체인, 미술품 조각투자 플랫폼 기술 지원', desc: '안전한 토큰 증권(STO) 생태계를 위한 월렛 보안 기술을 지원합니다.', date: '2023. 06. 04', img: 'img/press_04.png', delay: '0.3s' },
+        ];
+
+        const partners = Array(7).fill(0).map((_, i) => `img/partners0${i+1}.png`); // 이미지 1~7번 자동 생성
+
+        // --- 2. RENDER FUNCTIONS (이 부분이 'Component Logic' 역할) ---
+
+        function renderNav() {
+            // Desktop
+            const desktopHTML = navItems.map(item => `
+                <a href="#${item.id}" class="nav-link group relative flex flex-col items-center justify-center h-full" data-target="${item.id}">
+                    <div class="nav-dot absolute -top-[6px] w-1 h-1 rounded-full bg-[#FF6D2B] opacity-0 transition-opacity duration-300"></div>
+                    <span class="text-[16px] font-medium text-gray-400 group-hover:text-white transition-colors">${item.label}</span>
+                </a>
+            `).join('') + 
+            `<a href="#partners-contact" class="h-[44px] px-6 flex items-center justify-center bg-primary hover:bg-primaryHover text-white text-sm font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-md shadow-primary/20 ml-4">CONTACT US</a>`;
+            document.getElementById('desktop-menu-container').innerHTML = desktopHTML;
+
+            // Mobile
+            const mobileHTML = navItems.map(item => `
+                <a href="#${item.id}" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-white hover:text-primary transition-all hover:scale-105">${item.label}</a>
+            `).join('') + 
+            `<a href="#partners-contact" onclick="handleMobileClick(this)" class="mobile-menu-item text-3xl font-bold text-primary hover:text-white transition-all hover:scale-105 mt-4">CONTACT US</a>`;
+            document.getElementById('mobile-menu-items').innerHTML = mobileHTML;
         }
 
-        // 2. 모바일 리스트 렌더링
-        const transactionListMobile = document.getElementById('transaction-list-mobile');
-        if(transactionListMobile) {
-            transactionListMobile.innerHTML = transactions.map(t => `
-                <div class="flex flex-col p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm text-slate-500 dark:text-slate-400">${t.date}</span>
-                        <span class="px-2 py-1 rounded text-xs font-bold ${t.typeClass}">${t.type}</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <span class="font-bold text-slate-900 dark:text-white text-base">${t.title}</span>
-                        <div class="text-right">
-                            <span class="block font-bold text-slate-900 dark:text-white text-base tabular-nums">${t.amount}</span>
-                            <span class="flex items-center justify-end text-sm text-emerald-500 dark:text-emerald-400 font-bold mt-3"><i data-lucide="check-circle-2" class="w-3 h-3 mr-1"></i> 완료</span>
+        function renderValueCards() {
+            const html = valueCards.map(card => `
+                <div class="reveal group bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 w-full md:w-[700px]" style="transition-delay: ${card.delay};">
+                    <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
+                        <div class="flex-shrink-0 transition-colors">
+                            <img src="${card.img}" alt="${card.title}" class="w-[92px] h-[92px] object-contain" onerror="this.onerror=null; this.src='https://placehold.co/92x92/eee/ccc?text=Icon';">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary transition-colors">${card.title}</h3>
+                            <p class="text-[16px] text-gray-600 leading-relaxed break-keep">${card.desc}</p>
                         </div>
                     </div>
                 </div>
             `).join('');
+            document.getElementById('value-cards-container').innerHTML = html;
         }
-        
-        // 아이콘 렌더링
-        lucide.createIcons();
 
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-        
-        function updateChartTheme(isDark) {
-            const textColor = isDark ? '#94a3b8' : '#64748b'; 
-            const gridColor = isDark ? '#334155' : '#e2e8f0'; 
+        function renderNews() {
+            const html = newsData.map(news => `
+                <article class="reveal group cursor-pointer h-full flex flex-col bg-white" style="transition-delay: ${news.delay};">
+                    <div class="overflow-hidden rounded-2xl mb-4 h-48 bg-gray-100 relative shadow-sm">
+                        <img src="${news.img}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="News" onerror="this.onerror=null; this.src='https://placehold.co/800x600/eee/ccc?text=News';">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary rounded-full">${news.type}</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-[20px] font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">${news.title}</h3>
+                        <p class="text-gray-500 text-[16px] mb-4 line-clamp-2">${news.desc}</p>
+                    </div>
+                    <span class="text-[16px] text-gray-400 font-medium pt-4 border-t border-gray-100 block">${news.date}</span>
+                </article>
+            `).join('');
+            document.getElementById('press-grid-container').innerHTML = html;
+        }
+
+        function renderPartners() {
+            // 무한 스크롤을 위해 파트너 리스트를 두 번 반복해서 렌더링
+            const createRow = () => `
+                <div class="flex items-center gap-8 md:gap-24 px-4 md:px-12 flex-shrink-0">
+                    ${partners.map(src => `<img src="${src}" class="h-16 md:h-20 w-auto flex-shrink-0 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100" alt="Partner" onerror="this.onerror=null; this.src='https://placehold.co/150x50/333/999?text=PARTNER';">`).join('')}
+                </div>
+            `.repeat(2); // 2번 반복
+
+            document.getElementById('partners-scroll-row1').innerHTML = createRow();
+            document.getElementById('partners-scroll-row2').innerHTML = createRow();
+        }
+
+        // --- 3. INIT & EVENT LISTENERS ---
+
+        // 탭 버튼 스타일 업데이트 함수
+        function updateTabStyles(activeTabId) {
+            const tabs = ['redart', 'pick', 'tcwallet'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                if (t === activeTabId) {
+                    btn.className = "h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold transition-all duration-300 whitespace-nowrap bg-black text-white shadow-md transform scale-105 flex items-center justify-center";
+                } else {
+                    btn.className = "h-[44px] px-6 md:px-8 rounded-full text-[16px] md:text-[18px] font-bold text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap flex items-center justify-center";
+                }
+            });
+        }
+
+        // 탭 전환 로직 (기존 함수 + 스타일 업데이트 추가)
+        let currentTabId = 'redart';
+        function switchTab(tabId) {
+            currentTabId = tabId;
+            updateTabStyles(tabId); // 스타일 업데이트 호출
+
+            const tabs = ['redart', 'pick', 'tcwallet'];
             
-            if (window.expenseChartInstance) {
-                window.expenseChartInstance.options.scales.x.ticks.color = textColor;
-                window.expenseChartInstance.options.scales.y.ticks.color = textColor;
-                window.expenseChartInstance.options.scales.y.grid.color = gridColor;
-                window.expenseChartInstance.update();
-            }
-            if (window.portfolioChartInstance) {
-                window.portfolioChartInstance.data.datasets[0].borderColor = isDark ? '#1e293b' : '#ffffff';
-                window.portfolioChartInstance.update();
-            }
+            // Handle Content
+            tabs.forEach(t => {
+                const content = document.getElementById(`content-${t}`);
+                if (t === tabId) {
+                    content.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    content.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    content.classList.remove('opacity-100', 'translate-y-0');
+                    content.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }
+            });
+
+            // Handle Images
+            const handleImages = (selectorSuffix) => {
+                const images = document.querySelectorAll(`.screen-img-${selectorSuffix}`);
+                images.forEach(img => {
+                    const imgId = img.id.replace(`-mobile`, '').replace(`-desktop`, '').replace('screen-', '');
+                    if (imgId === tabId) {
+                        img.classList.remove('opacity-0');
+                        img.classList.add('opacity-100');
+                    } else {
+                        img.classList.remove('opacity-100');
+                        img.classList.add('opacity-0');
+                    }
+                });
+            };
+            handleImages('mobile');
+            handleImages('desktop');
         }
 
-        themeToggleBtn.addEventListener('click', () => {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                updateChartTheme(false);
+        // Initial Logic
+        window.addEventListener('load', function() {
+            // Render All Dynamic Contents
+            renderNav();
+            renderValueCards();
+            renderNews();
+            renderPartners();
+
+            setTimeout(() => { switchTab('redart'); }, 100);
+            
+            // Observer Setup (기존 유지)
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            
+            // 동적으로 생성된 요소도 관찰해야 하므로 setTimeout 사용
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            }, 100);
+        });
+
+        // Navbar Scroll Logic (기존 유지)
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 80) {
+                if (scrollTop > lastScrollTop) {
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                    navbar.classList.add('bg-black/95', 'shadow-lg');
+                }
             } else {
-                htmlElement.classList.add('dark');
-                updateChartTheme(true);
+                navbar.style.transform = 'translateY(0)';
+                if(scrollTop < 20) navbar.classList.remove('shadow-lg');
             }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+            // Scroll Spy
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let current = '';
+            const scrollPosition = window.scrollY + (window.innerHeight / 2);
+            sections.forEach(section => {
+                if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === current) link.classList.add('active');
+            });
         });
 
         // Mobile Menu Logic
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenuContainer = document.getElementById('mobile-menu-container');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
-
-        function toggleMobileMenu() {
-            if (mobileMenuContainer.classList.contains('hidden')) {
-                mobileMenuContainer.classList.remove('hidden');
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+                document.body.classList.add('overflow-hidden');
             } else {
-                mobileMenuContainer.classList.add('hidden');
+                menu.classList.add('translate-x-full');
+                document.body.classList.remove('overflow-hidden');
             }
         }
+        function handleMobileClick() { toggleMenu(); }
 
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        // Swipe Logic (기존 유지)
+        const swipeAreaMobile = document.getElementById('business-swipe-area-mobile');
+        const swipeAreaDesktop = document.getElementById('business-swipe-area-desktop');
+        let touchStartX = 0; let touchEndX = 0;
+        function addSwipeListener(element) {
+            if (!element) return;
+            element.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+            element.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); }, {passive: true});
         }
-        if (mobileMenuClose) {
-            mobileMenuClose.addEventListener('click', toggleMobileMenu);
-        }
-        if (mobileMenuBackdrop) {
-            mobileMenuBackdrop.addEventListener('click', toggleMobileMenu);
-        }
-
-        // Search Dropdown Logic
-        const desktopSearchInput = document.getElementById('desktop-search-input');
-        const desktopSearchDropdown = document.getElementById('desktop-search-dropdown');
-        const desktopSearchContainer = document.getElementById('desktop-search-container');
-
-        const mobileSearchInput = document.getElementById('mobile-search-input');
-        const mobileSearchDropdown = document.getElementById('mobile-search-dropdown');
-        const mobileSearchContainer = document.getElementById('mobile-search-container');
-
-        // Toggle logic for desktop
-        if(desktopSearchInput && desktopSearchDropdown) {
-            desktopSearchInput.addEventListener('focus', () => {
-                desktopSearchDropdown.classList.remove('hidden');
-                if (!notificationModal.classList.contains('hidden')) {
-                     notificationModal.classList.add('hidden');
-                     notificationModal.classList.remove('modal-enter');
-                     isNotificationOpen = false;
-                }
-            });
-        }
-
-        if(mobileSearchInput && mobileSearchDropdown) {
-            mobileSearchInput.addEventListener('focus', () => {
-                mobileSearchDropdown.classList.remove('hidden');
-            });
-        }
-
-        // Close search dropdowns when clicking outside
-        document.addEventListener('click', (e) => {
-            // Desktop
-            if(desktopSearchContainer && !desktopSearchContainer.contains(e.target)) {
-                desktopSearchDropdown.classList.add('hidden');
-            }
-            // Mobile
-            if(mobileSearchContainer && !mobileSearchContainer.contains(e.target)) {
-                mobileSearchDropdown.classList.add('hidden');
-            }
-        });
-
-
-        // Profile Dropdown Logic
-        const profileBtn = document.getElementById('profile-btn');
-        const profileDropdown = document.getElementById('profile-dropdown');
-        
-        if (profileBtn) {
-            profileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                
-                if (!notificationModal.classList.contains('hidden')) {
-                     notificationModal.classList.add('hidden');
-                     notificationModal.classList.remove('modal-enter');
-                     isNotificationOpen = false;
-                }
-
-                if (profileDropdown.classList.contains('hidden')) {
-                    profileDropdown.classList.remove('hidden');
-                } else {
-                    profileDropdown.classList.add('hidden');
-                }
-            });
-        }
-
-        document.addEventListener('click', (e) => {
-            if (profileDropdown && !profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
-                profileDropdown.classList.add('hidden');
-            }
-        });
-
-        const heroSection = document.getElementById('hero-section');
-        const heroToggleBtn = document.getElementById('hero-toggle-btn');
-        const heroBtnText = document.getElementById('hero-btn-text');
-        const heroBtnIcon = document.getElementById('hero-btn-icon');
-        const heroExpanded = document.getElementById('hero-expanded');
-        const heroCollapsed = document.getElementById('hero-collapsed');
-        const quickStats = document.getElementById('quick-stats');
-        let isHeroExpanded = true;
-
-        function updateHeroHeight() {
-            if (isHeroExpanded) {
-                heroSection.style.height = '400px';
-            } else {
-                if (window.innerWidth < 768) {
-                    heroSection.style.height = '140px'; 
-                } else {
-                    heroSection.style.height = '120px';
-                }
-            }
-        }
-
-        heroToggleBtn.addEventListener('click', () => {
-            isHeroExpanded = !isHeroExpanded;
-            if (isHeroExpanded) {
-                heroBtnText.innerText = '간략히 보기';
-                heroBtnIcon.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>'; 
-                heroExpanded.style.opacity = '1'; heroExpanded.style.pointerEvents = 'auto';
-                heroCollapsed.style.opacity = '0'; heroCollapsed.style.pointerEvents = 'none';
-                quickStats.style.display = 'grid'; 
-                quickStats.style.opacity = '1'; 
-                quickStats.style.transform = 'translateY(0)'; 
-            } else {
-                heroBtnText.innerText = '자산 큐브 보기';
-                heroBtnIcon.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
-                heroExpanded.style.opacity = '0'; heroExpanded.style.pointerEvents = 'none';
-                heroCollapsed.style.opacity = '1'; heroCollapsed.style.pointerEvents = 'auto';
-                quickStats.style.opacity = '0'; quickStats.style.transform = 'translateY(10px)';
-                setTimeout(() => { quickStats.style.display = 'none'; }, 300);
-            }
-            
-            updateHeroHeight();
-            lucide.createIcons();
-        });
-
-        window.addEventListener('resize', () => {
-            updateHeroHeight();
-        });
-
-        const notificationBtn = document.getElementById('notification-btn');
-        const notificationModal = document.getElementById('notification-modal');
-        let isNotificationOpen = false;
-        notificationBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            
-            if (profileDropdown && !profileDropdown.classList.contains('hidden')) {
-                profileDropdown.classList.add('hidden');
-            }
-
-            if(desktopSearchDropdown) desktopSearchDropdown.classList.add('hidden');
-            if(mobileSearchDropdown) mobileSearchDropdown.classList.add('hidden');
-
-            isNotificationOpen = !isNotificationOpen;
-            if (isNotificationOpen) {
-                notificationModal.classList.remove('hidden');
-                notificationModal.classList.add('modal-enter');
-            } else {
-                notificationModal.classList.add('hidden');
-                notificationModal.classList.remove('modal-enter');
-            }
-        });
-        document.addEventListener('click', (e) => {
-            if (isNotificationOpen && !notificationModal.contains(e.target) && !notificationBtn.contains(e.target)) {
-                isNotificationOpen = false;
-                notificationModal.classList.add('hidden');
-                notificationModal.classList.remove('modal-enter');
-            }
-        });
-
-        // --- CHATBOT LOGIC ---
-        const chatFab = document.getElementById('chat-fab');
-        const chatWindow = document.getElementById('chat-window');
-        const closeChat = document.getElementById('close-chat');
-        const chatInput = document.getElementById('chat-input');
-        const chatMessages = document.getElementById('chat-messages');
-
-        chatFab.addEventListener('click', () => {
-            chatWindow.classList.remove('hidden');
-            chatFab.classList.add('hidden'); 
-            chatInput.focus();
-        });
-        closeChat.addEventListener('click', () => {
-            chatWindow.classList.add('hidden');
-            chatFab.classList.remove('hidden');
-        });
-
-        function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            addMessage(text, 'user');
-            chatInput.value = '';
-            setTimeout(() => { showTypingIndicator(); }, 500);
-            setTimeout(() => {
-                removeTypingIndicator();
-                const aiResponses = [
-                    "네, 회원님의 포트폴리오를 분석 중입니다...",
-                    "현재 '안랩' 종목의 변동성이 큽니다. 주의 깊게 지켜보세요.",
-                    "지난달 대비 소비가 12% 감소하셨네요! 훌륭합니다.",
-                    "보안 테마주 관련 리포트를 메일로 보내드릴까요?",
-                    "더 궁금한 점이 있으신가요?"
-                ];
-                const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-                addMessage(randomResponse, 'ai');
-            }, 1500);
-        }
-
-        function addMessage(text, sender) {
-            const div = document.createElement('div');
-            div.className = `flex items-start space-x-2 ${sender === 'user' ? 'justify-end' : ''}`;
-            let content = '';
-            if (sender === 'ai') {
-                content = `<div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0"><i data-lucide="bot" class="w-5 h-5 text-slate-500 dark:text-slate-400"></i></div><div class="chat-bubble chat-ai slide-up">${text}</div>`;
-            } else {
-                content = `<div class="chat-bubble chat-user slide-up">${text}</div>`;
-            }
-            div.innerHTML = content;
-            chatMessages.appendChild(div);
-            lucide.createIcons();
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function showTypingIndicator() {
-            const div = document.createElement('div');
-            div.id = 'typing-indicator';
-            div.className = 'flex items-start space-x-2';
-            div.innerHTML = `<div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0"><i data-lucide="bot" class="w-5 h-5 text-slate-500 dark:text-slate-400"></i></div><div class="chat-bubble chat-ai flex space-x-1 items-center"><div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div><div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div></div>`;
-            chatMessages.appendChild(div);
-            lucide.createIcons();
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function removeTypingIndicator() {
-            const indicator = document.getElementById('typing-indicator');
-            if (indicator) indicator.remove();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDark = htmlElement.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? '#334155' : '#e2e8f0';
-
-            const ctxPortfolio = document.getElementById('portfolioChart').getContext('2d');
-            window.portfolioChartInstance = new Chart(ctxPortfolio, {
-                type: 'doughnut',
-                data: {
-                    labels: ['주식 (Stocks)', '채권 (Bonds)', '현금 (Cash)'],
-                    datasets: [{
-                        data: [55, 30, 15],
-                        backgroundColor: ['#3b82f6', '#a855f7', '#10b981'],
-                        borderColor: isDark ? '#1e293b' : '#ffffff',
-                        borderWidth: 2,
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '75%',
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                        tooltip: {
-                            backgroundColor: '#1e293b',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: '#334155',
-                            borderWidth: 1,
-                            padding: 14,
-                            cornerRadius: 8
-                        }
-                    }
-                }
-            });
-
-            const ctxExpense = document.getElementById('expenseChart').getContext('2d');
-            window.expenseChartInstance = new Chart(ctxExpense, {
-                type: 'bar',
-                data: {
-                    labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
-                    datasets: [{ label: '지출 금액', data: [240, 190, 300, 250, 210, 180], backgroundColor: '#3b82f6', borderRadius: 4, barThickness: 20 }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    scales: { y: { beginAtZero: true, grid: { color: gridColor, drawBorder: false }, ticks: { color: textColor, font: { size: 11 } }, border: { display: false } }, x: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } }, border: { display: false } } },
-                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1e293b', titleColor: '#fff', bodyColor: '#fff', borderColor: '#334155', borderWidth: 1, cornerRadius: 8, padding: 14 } }
-                }
-            });
-
-            const dividendDateElem = document.getElementById('dividend-date');
-            if (dividendDateElem) {
-                const now = new Date();
-                const twoWeeksLater = new Date(now.setDate(now.getDate() + 14));
-                const mm = twoWeeksLater.getMonth() + 1;
-                const dd = twoWeeksLater.getDate();
-                dividendDateElem.textContent = `다음 입금 예정일: ${mm}월 ${dd}일`;
-            }
-        });
-
-        // ==========================================
-        // [포트폴리오 증빙용] 컴포넌트 구조화 스크립트
-        // "반복되는 UI를 데이터 기반의 컴포넌트 함수로 변환하여 렌더링"
-        // ==========================================
-
-        /**
-         * 1. 실시간 인기 종목 컴포넌트 (StockItem Component)
-         */
-        const stockData = [
-            { rank: 1, name: 'POSCO홀딩스', change: '2.5%', type: 'up' },
-            { rank: 2, name: '에코프로비엠', change: '-1.2%', type: 'down' },
-            { rank: 3, name: 'NAVER', change: '0.0%', type: 'flat' }
-        ];
-
-        // StockItem: 데이터를 받아 HTML 문자열을 반환하는 함수형 컴포넌트
-        const StockItem = (stock) => {
-            let colorClass = 'text-slate-400';
-            let icon = 'minus';
-            
-            if (stock.type === 'up') {
-                colorClass = 'text-red-500';
-                icon = 'trending-up';
-            } else if (stock.type === 'down') {
-                colorClass = 'text-blue-500';
-                icon = 'trending-down';
-            }
-
-            return `
-                <li class="flex items-center justify-between text-base cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 p-2 rounded-lg group transition-colors">
-                    <div class="flex items-center">
-                        <span class="w-4 text-center ${stock.rank <= 3 ? 'text-blue-500 font-bold' : 'text-slate-500'} mr-3">${stock.rank}</span>
-                        <span class="text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${stock.name}</span>
-                    </div>
-                    <span class="text-sm ${colorClass} flex items-center">
-                        <i data-lucide="${icon}" class="w-3 h-3 mr-1"></i>${stock.change}
-                    </span>
-                </li>
-            `;
-        };
-
-        // 렌더링 실행
-        const stockListEl = document.getElementById('stock-list');
-        if (stockListEl) {
-            stockListEl.innerHTML = stockData.map(stock => StockItem(stock)).join('');
-        }
-
-
-        /**
-         * 2. 추천 종목 카드 컴포넌트 (RecommendationCard Component)
-         */
-        const recommendationData = [
-            { 
-                name: '사이버원', code: '356890', img: 'img/stock_01.png', 
-                risk: 'Low Risk', riskColor: 'emerald', 
-                analysis: '최근 공공기관 수주 증가 및 외국인 3일 연속 순매수 포착.',
-                returnRate: '+12.4%', tag: '#보안관제', tagColor: 'purple'
-            },
-            { 
-                name: '안랩', code: '053800', img: 'img/stock_02.png', 
-                risk: 'Mid Risk', riskColor: 'orange', 
-                analysis: '모바일 보안 시장 점유율 확대, 기술적 골든크로스 근접.',
-                returnRate: '+8.1%', tag: '#백신/보안', tagColor: 'purple'
-            },
-            { 
-                name: '지니언스', code: '263860', img: 'img/stock_03.png', 
-                risk: 'High Risk', riskColor: 'red', 
-                analysis: 'EDR 솔루션 매출 급증 예상이나 단기 과매수 구간 진입.',
-                returnRate: '+15.2%', tag: '#네트워크', tagColor: 'purple'
-            }
-        ];
-
-        // Card Component: 복잡한 카드 UI를 재사용 가능한 구조로 분리
-        const RecommendationCard = (item) => {
-            // Tailwind 색상 동적 처리를 위한 매핑
-            const riskBg = { emerald: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', orange: 'bg-orange-500/10 text-orange-600 dark:text-orange-400', red: 'bg-red-500/10 text-red-600 dark:text-red-400' };
-            
-            return `
-                <div class="bg-slate-50 dark:bg-slate-800/30 p-4 rounded-xl cursor-pointer transition-all hover:scale-[1.02] hover:shadow-md flex flex-col justify-between h-full">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="flex items-center space-x-3">
-                                <img src="${item.img}" alt="${item.name}" class="w-12 h-12 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 object-cover">
-                                <div>
-                                    <h4 class="font-bold text-slate-900 dark:text-white text-base">${item.name}</h4>
-                                    <span class="text-xs text-slate-500 tabular-nums">${item.code}</span>
-                                </div>
-                            </div>
-                            <span class="text-xs font-bold px-2 py-1 rounded ${riskBg[item.riskColor]}">${item.risk}</span>
-                        </div>
-                        <div class="mb-3 pl-1 border-l-2 border-purple-500/30">
-                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                                <span class="text-purple-600 dark:text-purple-400 font-semibold">AI 분석:</span> ${item.analysis}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-end border-t border-slate-200 dark:border-slate-700/50 pt-3 mt-auto">
-                        <div>
-                            <span class="text-xs text-slate-500 block mb-1">AI 예측 수익률</span>
-                            <span class="text-xl font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">${item.returnRate}</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-xs text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2 py-1 rounded-full border border-purple-500/20">${item.tag}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        // 렌더링 실행
-        const recommendListEl = document.getElementById('recommendation-list');
-        if (recommendListEl) {
-            recommendListEl.innerHTML = recommendationData.map(item => RecommendationCard(item)).join('');
-            // 동적으로 추가된 아이콘들을 위해 Lucide 다시 실행
-            lucide.createIcons();
+        addSwipeListener(swipeAreaMobile);
+        addSwipeListener(swipeAreaDesktop);
+        function handleSwipe() {
+            const tabs = ['redart', 'pick', 'tcwallet'];
+            const currentIndex = tabs.indexOf(currentTabId);
+            if (touchEndX < touchStartX - 50) switchTab(tabs[(currentIndex + 1) % tabs.length]);
+            else if (touchEndX > touchStartX + 50) switchTab(tabs[(currentIndex - 1 + tabs.length) % tabs.length]);
         }
     </script>
 </body>
